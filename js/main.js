@@ -1,17 +1,16 @@
-let getRandom =  function(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return (min >= max) ?  alert('Введите число больше  MIN') : Math.floor(Math.random() * (max - min + 1)) + min;
+const str = document.querySelector('.social__footer-text');
+
+const getRandomNum =  function(minNumber, maxNumber) {
+  const randomNum = Math.floor(Math.random() * maxNumber); // Math.random() выведете рандомно число от 0 до 1 , потом мы умножим на maxNubmer - это будет число  с запятой , а floor его округлит к меньшему значению
+  return randomNum > minNumber ? randomNum : minNumber;
 };
 
-alert(getRandom(2, 2));
+window.console.log(getRandomNum(1, 10));
 
 
-let lengthFeild = 140;
-let field = document.querySelector('.comment');
+const checkLengthOfStr = (str, maxLength = 140) => str.length <= maxLength;
 
-let getLengthField = function(field, lengthFeild) {
-  return (field.length <= lengthFeild) ? true : false;
-}
+window.console.log(checkLengthOfStr.length(str));
 
-getLengthField(field, lengthFeild);
+
+
