@@ -2,3 +2,4 @@
 // window.console.log(checkLengthOfStr(str));
 
 import './data.js';
+import './create-photo.js';
