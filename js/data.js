@@ -36,8 +36,8 @@ const createCommentObject = function(index) {
 };
 
 
-const arrayOfObjectsPhoto = new Array(OBJECT_COUNT).fill(null).map((element, index) => createObjectOfPhoto(index));
+const arrayOfComments = new Array(OBJECT_COMMENT_COUNT).fill(null).map((_, index) => createCommentObject(index));
 
-const arrayOfComments = new Array(OBJECT_COMMENT_COUNT).fill(null).map((element, index) => createCommentObject(index));
+const arrayOfObjectsPhoto = new Array(OBJECT_COUNT).fill(null).map((_, index) => createObjectOfPhoto(index));
 
 export {arrayOfObjectsPhoto};
