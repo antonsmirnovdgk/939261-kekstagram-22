@@ -3,13 +3,13 @@ const getRandomNum =  function(minNumber, maxNumber) {
   return randomNum > minNumber ? randomNum : minNumber;
 };
 
-// window.console.log(getRandomNum(1, 10));
+
 
 const checkLengthOfStr = function(str, maxLength = 140) {
   return Number(str.length) <= maxLength;
 };
 
-// window.console.log(checkLengthOfStr(abc));
+
 
 
 export {getRandomNum, checkLengthOfStr};
