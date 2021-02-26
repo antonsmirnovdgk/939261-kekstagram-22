@@ -1,4 +1,5 @@
-import {arrayOfObjectsPhoto} from './data.js'
+import {arrayOfObjectsPhoto} from './data.js';
+import {isEscEvent} from './utils.js';
 
 const parrentContainer = document.querySelector('.pictures');
 const fullImg = document.querySelector('.big-picture');
@@ -14,49 +15,56 @@ const description = document.querySelector('.social__caption')
 
 
 
-const addSmallPictureClick = function(evt){
+const onParentContainerClick = function(evt){
   if(evt.target.parentNode.matches('a')) {
-    document.body.classList.add('modal-open');
-    fullImg.classList.remove('hidden');
-    loaderComment.classList.add('hidden');
-    likesCount.classList.add('hidden');
-
-    let objectOfSmallPic = arrayOfObjectsPhoto.find((item) => {
-      if(+item.id === +evt.target.parentNode.id){
-        return item;
-      }
-    })
-
-    divWithImg.childNodes[1].src = objectOfSmallPic.url;
-    likes.innerHTML = objectOfSmallPic.likes;
-    description.textContent = objectOfSmallPic.description;
-
-
-    for(let i = 0; i < commentText.length; i++){
-      commentText[i].textContent = objectOfSmallPic.comments[i].message;
-    }
-
-    for(let i = 0; i < socialImg.length; i++){
-      socialImg[i].alt = objectOfSmallPic.comments[i].name;
-      socialImg[i].src = objectOfSmallPic.comments[i].avatar
-    }
+    const objectOfSmallPic = arrayOfObjectsPhoto.find((item) => +item.id === +evt.target.parentNode.id);
+    fillBigPucture(objectOfSmallPic);
+    showBigPicture();
   }
-
 }
 
-parrentContainer.addEventListener('click', addSmallPictureClick)
+parrentContainer.addEventListener('click', onParentContainerClick)
 
+
+const showBigPicture = function(){
+  document.body.classList.add('modal-open');
+  fullImg.classList.remove('hidden');
+  loaderComment.classList.add('hidden');
+  likesCount.classList.add('hidden');
+
+  document.addEventListener('keydown', onEscKeyDown);
+}
+
+const fillBigPucture = function(object){
+  divWithImg.childNodes[1].src = object.url;
+  likes.innerHTML = object.likes;
+  description.textContent = object.description;
+
+
+  for(let i = 0; i < commentText.length; i++){
+    commentText[i].textContent = object.comments[i].message;
+  }
+
+  for(let i = 0; i < socialImg.length; i++){
+    socialImg[i].alt = object.comments[i].name;
+    socialImg[i].src = object.comments[i].avatar
+  }
+}
+
+const onEscKeyDown = function(evt){
+  if(isEscEvent(evt)){
+    closeBigImg();
+  }
+}
+
+const closeBigImg = function(){
+  fullImg.classList.add('hidden');
+  document.removeEventListener('keydown', onEscKeyDown);
+};
 
 closedButton.addEventListener('click', function(){
   document.body.classList.remove('modal-open');
-  fullImg.classList.add('hidden');
-})
-
-
-document.addEventListener('keydown', function(evt){
-  if(evt.keyCode === 27) {
-    fullImg.classList.add('hidden');
-  }
-})
+  closeBigImg();
+});
 
 
