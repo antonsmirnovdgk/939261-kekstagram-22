@@ -31,13 +31,12 @@ const showBigPicture = function(){
   likesCount.classList.add('hidden');
 
   document.addEventListener('keydown', onEscKeyDown);
-}
+};
 
 const fillBigPucture = function(object){
   divWithImg.childNodes[1].src = object.url;
   likes.textContent = object.likes;
   description.textContent = object.description;
-
 
 
   commentText.forEach((item, i) => {
@@ -48,13 +47,13 @@ const fillBigPucture = function(object){
     item.alt = object.comments[i].name;
     item.src = object.comments[i].avatar
   });
-
+};
 
 const onEscKeyDown = function(evt){
   if(isEscEvent(evt)){
     closeBigImg();
   }
-}
+};
 
 const closeBigImg = function(){
   fullImg.classList.add('hidden');
@@ -66,5 +65,4 @@ closedButton.addEventListener('click', function(){
   closeBigImg();
 });
 
-
-parrentContainer.addEventListener('click', onParentContainerClick)
+parrentContainer.addEventListener('click', onParentContainerClick);
