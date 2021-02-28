@@ -18,7 +18,7 @@ const createObjectOfPhoto = function(index) {
   return {
     id: index + 1,
     url: 'photos/' + getRandomNum(1, 25) + '.jpg',
-    description: getRandomNum(0, DESCRIPTION.length),
+    description: DESCRIPTION[getRandomNum(0, DESCRIPTION.length - 1)],
     likes: getRandomNum(15, 200),
     comments: arrayOfComments,
   }
