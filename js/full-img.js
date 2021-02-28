@@ -23,8 +23,6 @@ const onParentContainerClick = function(evt){
   }
 }
 
-parrentContainer.addEventListener('click', onParentContainerClick)
-
 
 const showBigPicture = function(){
   document.body.classList.add('modal-open');
@@ -37,19 +35,20 @@ const showBigPicture = function(){
 
 const fillBigPucture = function(object){
   divWithImg.childNodes[1].src = object.url;
-  likes.innerHTML = object.likes;
+  likes.textContent = object.likes;
   description.textContent = object.description;
 
 
-  for(let i = 0; i < commentText.length; i++){
-    commentText[i].textContent = object.comments[i].message;
-  }
 
-  for(let i = 0; i < socialImg.length; i++){
-    socialImg[i].alt = object.comments[i].name;
-    socialImg[i].src = object.comments[i].avatar
-  }
-}
+  commentText.forEach((item, i) => {
+    item.textContent = object.comments[i].message;
+  });
+
+  socialImg.forEach((item, i) => {
+    item.alt = object.comments[i].name;
+    item.src = object.comments[i].avatar
+  });
+
 
 const onEscKeyDown = function(evt){
   if(isEscEvent(evt)){
@@ -59,12 +58,13 @@ const onEscKeyDown = function(evt){
 
 const closeBigImg = function(){
   fullImg.classList.add('hidden');
-  document.removeEventListener('keydown', onEscKeyDown);
+  document.body.classList.remove('modal-open');
 };
 
 closedButton.addEventListener('click', function(){
-  document.body.classList.remove('modal-open');
+  document.removeEventListener('keydown', onEscKeyDown);
   closeBigImg();
 });
 
 
+parrentContainer.addEventListener('click', onParentContainerClick)
