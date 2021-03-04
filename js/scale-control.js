@@ -79,28 +79,82 @@ const updateOptions = function(min, max, start, step) {
 
 document.querySelector('.effect-level').classList.add('visually-hidden')
 
+
+const effectMap = {
+  'effect-chrome': {
+    className: 'effects__preview--chrome',
+    filter: 'grayscale',
+    unit: ' ',
+    options: {
+      min: 0,
+      max: 1,
+      start: 1,
+      step: 0.01,
+    },
+  },
+}
+
+// if(evt.target.matches('input[type="radio"]')){
+//   const id = evt.target.id;
+
+//   if(id === 'effect-none') {
+//     sliderLevel.classList.add('visually-hidden');
+//     bigImg.style.filter = 'none';
+//   }
+
+//   if(id === effectMap[id]) {
+//     const effect = effectMap[id];
+//     const {min, max, start, step} = effect.options;
+
+//     bigImg.classList.add(effect.className);
+//     updateOptions(min, max, start, step);
+//     setEffectFieldValue(effect.type , effect.units);
+//     sliderLevel.classList.remove('visually-hidden')
+//   }
+// }
+
+
 const onParrentUploadContaierCLick = function(evt){
 
   if(evt.target.matches('input[type="radio"]')){
 
 
-    if(evt.target.checked && evt.target.id === 'effect-none') {
+    // if(evt.target.checked && evt.target.id === 'effect-none') {
 
+    //   sliderLevel.classList.add('visually-hidden');
+
+    //   bigImg.style.filter = 'none';
+    // }
+
+
+    const id = evt.target.id;
+
+    if(id === 'effect-none') {
       sliderLevel.classList.add('visually-hidden');
-
       bigImg.style.filter = 'none';
     }
 
+    if(id === effectMap[id]) {
+      const effect = effectMap[id];
+      const {min, max, start, step} = effect.options;
 
-    if(evt.target.checked && evt.target.id === 'effect-chrome') {
-      bigImg.classList.add('effects__preview--chrome');
-
-      updateOptions(0, 1, 1, 0.1)
-
-      setEffectFieldValue('grayscale' , '');
-
+      bigImg.classList.add(effect.className);
+      updateOptions(min, max, start, step);
+      setEffectFieldValue(effect.filter , effect.unit);
       sliderLevel.classList.remove('visually-hidden')
     }
+
+
+
+    // if(evt.target.checked && evt.target.id === 'effect-chrome') {
+    //   bigImg.classList.add('effects__preview--chrome');
+
+    //   updateOptions(0, 1, 1, 0.1)
+
+    //   setEffectFieldValue('grayscale' , '');
+
+    //   sliderLevel.classList.remove('visually-hidden')
+    // }
 
 
     if(evt.target.checked && evt.target.id === 'effect-sepia') {
