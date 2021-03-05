@@ -1,5 +1,6 @@
 import {resetSlider} from './photos-effect.js';
 
+
 const uploadField = document.querySelector('#upload-file');
 const imgUpload = document.querySelector('.img-upload__overlay');
 const closeUploadButton = document.querySelector('#upload-cancel');
