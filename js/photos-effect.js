@@ -1,4 +1,6 @@
 import {resetScale} from './scale-photo.js';
+// import {validateHashtags} from './valid-hashtags.js';
+import {isEscEvent} from './utils.js';
 
 
 const bigImg = document.querySelector('.img-upload__preview');
@@ -11,6 +13,8 @@ const sliderLevel = document.querySelector('.effect-level');
 
 const resetSlider = function(){
   resetScale();
+  // validateHashtags();
+  // validComment();
   bigImg.style.filter = 'none';
   sliderLevel.classList.add('visually-hidden');
 }
@@ -104,16 +108,20 @@ const effectMap = {
 };
 
 
+
+
 let filter = null; // название фильтра
 let unit = null; // единица измереиня
 
 
 const onParrentUploadContaierCLick = function({target}){
+
+
   if(target.id === 'effect-none') {
     resetSlider();
     return null;
   } else {
-    sliderLevel.classList.remove('visually-hidden')
+    sliderLevel.classList.remove('visually-hidden');
   }
 
   filter = effectMap[target.value].filter;
@@ -126,7 +134,7 @@ const onParrentUploadContaierCLick = function({target}){
     effectValue.value = values[handle];
     bigImg.style.filter = `${filter}(${values[handle]}${unit})`;
   });
-}
+};
 
 formImgUpload.addEventListener('change', onParrentUploadContaierCLick);
 
