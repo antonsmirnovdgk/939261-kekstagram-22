@@ -4,7 +4,7 @@ import {resetScale} from './scale-photo.js';
 const bigImg = document.querySelector('.img-upload__preview');
 const effectField = document.querySelector('.effect-level__slider');
 const effectValue = document.querySelector('.effect-level__value');
-const formImgUpload = document.querySelector('.img-upload__effect');
+const formImgUpload = document.querySelector('.img-upload__effects');
 const sliderLevel = document.querySelector('.effect-level');
 
 
