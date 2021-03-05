@@ -1,6 +1,5 @@
 import {resetScale} from './scale-photo.js';
 // import {validateHashtags} from './valid-hashtags.js';
-import {isEscEvent} from './utils.js';
 
 
 const bigImg = document.querySelector('.img-upload__preview');
