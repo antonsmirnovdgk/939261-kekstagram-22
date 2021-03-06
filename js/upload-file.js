@@ -7,14 +7,18 @@ const imgUpload = document.querySelector('.img-upload__overlay');
 const closeUploadButton = document.querySelector('#upload-cancel');
 
 
-uploadField.addEventListener('click', function(){
+// Открытие поп-ап
+uploadField.addEventListener('change', function(){
   resetSlider();
-  imgUpload.classList.remove('hidden');
-  document.body.classList.add('modal-open');
-
   document.addEventListener('keydown', onEscKeyDown);
+  document.body.classList.add('modal-open');
+  imgUpload.classList.remove('hidden');
 });
 
+
+
+
+//закрытие поп-ап
 closeUploadButton.addEventListener('click', function(){
   document.removeEventListener('keydown', onEscKeyDown);
   closeImg();
