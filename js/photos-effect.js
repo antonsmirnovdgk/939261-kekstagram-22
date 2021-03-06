@@ -1,6 +1,7 @@
 import {resetScale} from './scale-photo.js';
 import {validateHashtags} from './valid-hashtags.js';
 
+
 const bigImg = document.querySelector('.img-upload__preview');
 const effectField = document.querySelector('.effect-level__slider');
 const effectValue = document.querySelector('.effect-level__value');
@@ -12,7 +13,6 @@ const sliderLevel = document.querySelector('.effect-level');
 const resetSlider = function(){
   resetScale();
   validateHashtags();
-  // validComment();
   bigImg.style.filter = 'none';
   sliderLevel.classList.add('visually-hidden');
 }
@@ -104,6 +104,8 @@ const effectMap = {
     },
   },
 };
+
+
 
 
 let filter = null; // название фильтра
