@@ -1,5 +1,5 @@
 import {resetScale} from './scale-photo.js';
-import {validateHashtags} from './valid-hashtags.js';
+import {validateHashtags, validComment} from './valid-hashtags.js';
 
 
 const bigImg = document.querySelector('.img-upload__preview');
@@ -12,6 +12,7 @@ const sliderLevel = document.querySelector('.effect-level');
 
 const resetSlider = function(){
   resetScale();
+  validComment();
   validateHashtags();
   bigImg.style.filter = 'none';
   sliderLevel.classList.add('visually-hidden');

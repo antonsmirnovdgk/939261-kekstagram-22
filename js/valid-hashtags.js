@@ -31,7 +31,7 @@ const validateHashtags = function() {
 
     for(let i = 0; i < inputArray.length; i++){
       if(inputValue[0] !== '#')  {
-        fieldHashtag.setCustomValidity('Начаинается только с #');  //Начаинается только с #
+        fieldHashtag.setCustomValidity('Начинается только с #');  //Начаинается только с #
       } else if(inputArray[1] == ' ') {
         fieldHashtag.setCustomValidity('Хештег не может состоять только из одного символа #'); // хеш-тег не может состоять только из одной решётки;
       } else if (inputArray[i].length > HASHTAGS_LENGTH) {
@@ -41,7 +41,7 @@ const validateHashtags = function() {
       } else if (isHashtagEmoji(inputArray[i])){
         fieldHashtag.setCustomValidity('Эмодзи использовать нельзя')
       } else if(inputArray.length > MAX_HASHTAGS) {
-        fieldHashtag.setCustomValidity('Хэштегов не может быть больше 5ти');
+        fieldHashtag.setCustomValidity('Хэштегов не может быть больше 5-ти');
       } else if(inputArray[i].includes(inputArray)){
         fieldHashtag.setCustomValidity('Хэштег не может повторятся'); // Без повторений
       }
@@ -51,21 +51,28 @@ const validateHashtags = function() {
     }
 
     fieldHashtag.reportValidity();
-
-
-    fieldComment.addEventListener('input', function() {
-      const commentValue = fieldComment.value;
-
-      if(commentValue > MAX_LENGTH_COMMENT) {
-        fieldComment.setCustomValidity('Комментарий не может привышать больше 140 символов')
-      }
-      else {
-        fieldHashtag.reportValidity();
-      }
-    })
-
   });
 }
+
+const validComment = function() {
+
+  fieldComment.addEventListener('input', function() {
+    const commentValue = fieldComment.value;
+
+    if(commentValue.length > MAX_LENGTH_COMMENT) {
+      fieldComment.setCustomValidity('Комментарий не может привышать больше 140 символов');
+    }
+    else {
+      fieldComment.setCustomValidity('');
+    }
+
+    fieldComment.reportValidity();
+  })
+}
+
+
+
+
 
 const onFieldFocus = function(evt) {
 
@@ -78,4 +85,4 @@ const onFieldFocus = function(evt) {
   });
 };
 
-export {validateHashtags, onFieldFocus};
+export {validateHashtags, validComment, onFieldFocus};
