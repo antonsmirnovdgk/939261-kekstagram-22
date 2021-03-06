@@ -1,12 +1,11 @@
 import {isEscEvent} from './utils.js';
 
-
-const fieldHashtag = document.querySelector('.text__hashtags');
-const fieldComment = document.querySelector('.text__description');
-
 const HASHTAGS_LENGTH = 20;
 const MAX_HASHTAGS = 5;
 const MAX_LENGTH_COMMENT = 140;
+
+const fieldHashtagElement = document.querySelector('.text__hashtags');
+const fieldCommentElement = document.querySelector('.text__description');
 
 
 
@@ -24,54 +23,51 @@ const isHashtagEmoji = function(hashtag)  {
 
 const validateHashtags = function() {
 
-  fieldHashtag.addEventListener('input', function() {
+  fieldHashtagElement.addEventListener('input', function() {
 
-    const inputValue = fieldHashtag.value;
+    const inputValue = fieldHashtagElement.value;
     const inputArray = inputValue.split(' ');
 
     for(let i = 0; i < inputArray.length; i++){
       if(inputValue[0] !== '#')  {
-        fieldHashtag.setCustomValidity('Начинается только с #');  //Начаинается только с #
+        fieldHashtagElement.setCustomValidity('Начинается только с #');  //Начаинается только с #
       } else if(inputArray[1] == ' ') {
-        fieldHashtag.setCustomValidity('Хештег не может состоять только из одного символа #'); // хеш-тег не может состоять только из одной решётки;
+        fieldHashtagElement.setCustomValidity('Хештег не может состоять только из одного символа #'); // хеш-тег не может состоять только из одной решётки;
       } else if (inputArray[i].length > HASHTAGS_LENGTH) {
-        fieldHashtag.setCustomValidity('Хэштег должен быть не больше 20 символов'); // максимальная длина одного хэш-тега 20 символов, включая решётку;
+        fieldHashtagElement.setCustomValidity('Хэштег должен быть не больше 20 символов'); // максимальная длина одного хэш-тега 20 символов, включая решётку;
       } else if (isHashtagSymbol(inputArray[i])) {
-        fieldHashtag.setCustomValidity('После # должны идти только буквы')
+        fieldHashtagElement.setCustomValidity('После # должны идти только буквы')
       } else if (isHashtagEmoji(inputArray[i])){
-        fieldHashtag.setCustomValidity('Эмодзи использовать нельзя')
+        fieldHashtagElement.setCustomValidity('Эмодзи использовать нельзя')
       } else if(inputArray.length > MAX_HASHTAGS) {
-        fieldHashtag.setCustomValidity('Хэштегов не может быть больше 5-ти');
+        fieldHashtagElement.setCustomValidity('Хэштегов не может быть больше 5-ти');
       } else if(inputArray[i].includes(inputArray)){
-        fieldHashtag.setCustomValidity('Хэштег не может повторятся'); // Без повторений
+        fieldHashtagElement.setCustomValidity('Хэштег не может повторятся'); // Без повторений
       }
       else {
-        fieldHashtag.setCustomValidity('');
+        fieldHashtagElement.setCustomValidity('');
       }
     }
 
-    fieldHashtag.reportValidity();
+    fieldHashtagElement.reportValidity();
   });
 }
 
 const validComment = function() {
 
-  fieldComment.addEventListener('input', function() {
-    const commentValue = fieldComment.value;
+  fieldCommentElement.addEventListener('input', function() {
+    const commentValue = fieldCommentElement.value;
 
     if(commentValue.length > MAX_LENGTH_COMMENT) {
-      fieldComment.setCustomValidity('Комментарий не может привышать больше 140 символов');
+      fieldCommentElement.setCustomValidity('Комментарий не может привышать больше 140 символов');
     }
     else {
-      fieldComment.setCustomValidity('');
+      fieldCommentElement.setCustomValidity('');
     }
 
-    fieldComment.reportValidity();
+    fieldCommentElement.reportValidity();
   })
 }
-
-
-
 
 
 const onFieldFocus = function(evt) {

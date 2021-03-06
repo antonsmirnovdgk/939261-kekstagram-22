@@ -2,11 +2,11 @@ import {resetScale} from './scale-photo.js';
 import {validateHashtags, validComment} from './valid-hashtags.js';
 
 
-const bigImg = document.querySelector('.img-upload__preview');
-const effectField = document.querySelector('.effect-level__slider');
-const effectValue = document.querySelector('.effect-level__value');
-const formImgUpload = document.querySelector('.img-upload__effects');
-const sliderLevel = document.querySelector('.effect-level');
+const bigImgUploadElement = document.querySelector('.img-upload__preview');
+const effectFieldElement = document.querySelector('.effect-level__slider');
+const effectValueElement = document.querySelector('.effect-level__value');
+const formImgUploadElement = document.querySelector('.img-upload__effects');
+const sliderLevelElement = document.querySelector('.effect-level');
 
 
 
@@ -14,14 +14,14 @@ const resetSlider = function(){
   resetScale();
   validComment();
   validateHashtags();
-  bigImg.style.filter = 'none';
-  sliderLevel.classList.add('visually-hidden');
+  bigImgUploadElement.style.filter = 'none';
+  sliderLevelElement.classList.add('visually-hidden');
 }
 
 
 /* global noUiSlider:readonly */
 
-noUiSlider.create(effectField, {
+noUiSlider.create(effectFieldElement, {
   range: {
     min: 0,
     max: 1,
@@ -120,22 +120,22 @@ const onParrentUploadContaierCLick = function({target}){
     resetSlider();
     return null;
   } else {
-    sliderLevel.classList.remove('visually-hidden');
+    sliderLevelElement.classList.remove('visually-hidden');
   }
 
   filter = effectMap[target.value].filter;
   unit = effectMap[target.value].unit;
 
 
-  effectField.noUiSlider.updateOptions(effectMap[target.value].options);
+  effectFieldElement.noUiSlider.updateOptions(effectMap[target.value].options);
 
-  effectField.noUiSlider.on('update', (values, handle) => {
-    effectValue.value = values[handle];
-    bigImg.style.filter = `${filter}(${values[handle]}${unit})`;
+  effectFieldElement.noUiSlider.on('update', (values, handle) => {
+    effectValueElement.value = values[handle];
+    bigImgUploadElement.style.filter = `${filter}(${values[handle]}${unit})`;
   });
 };
 
-formImgUpload.addEventListener('change', onParrentUploadContaierCLick);
+formImgUploadElement.addEventListener('change', onParrentUploadContaierCLick);
 
 
 export {resetSlider};
