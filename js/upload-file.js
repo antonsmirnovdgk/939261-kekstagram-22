@@ -12,15 +12,22 @@ const onFocusText = document.querySelector('.img-upload__text');
 
 
 
-uploadField.addEventListener('click', function(){
+// Открытие поп-ап
+uploadField.addEventListener('change', function(){
   resetSlider();
-  imgUpload.classList.remove('hidden');
-  document.body.classList.add('modal-open');
-
   document.addEventListener('keydown', onEscKeyDown);
+<<<<<<< HEAD
   onFocusText.addEventListener('focusin', onFieldFocus);
+=======
+  document.body.classList.add('modal-open');
+  imgUpload.classList.remove('hidden');
+>>>>>>> module6-task1
 });
 
+
+
+
+//закрытие поп-ап
 closeUploadButton.addEventListener('click', function(){
   document.removeEventListener('keydown', onEscKeyDown);
   onFocusText.removeEventListener('focusin', onFieldFocus);
