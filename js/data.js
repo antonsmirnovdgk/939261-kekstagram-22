@@ -10,7 +10,7 @@ const COMMENTS = [' Всё отлично!',
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ]
-const DESCRIPTION = ['Кот-суши', 'Закат', 'Озеро', 'Очень красивые глаза', 'Супер-кар'];
+const DESCRIPTIONS = ['Кот-суши', 'Закат', 'Озеро', 'Очень красивые глаза', 'Супер-кар'];
 
 //Объект фотокарточки
 
@@ -18,7 +18,7 @@ const createObjectOfPhoto = function(index) {
   return {
     id: index + 1,
     url: 'photos/' + getRandomNum(1, 25) + '.jpg',
-    description: DESCRIPTION[getRandomNum(0, DESCRIPTION.length - 1)],
+    description: DESCRIPTIONS[getRandomNum(0, DESCRIPTIONS.length - 1)],
     likes: getRandomNum(15, 200),
     comments: arrayOfComments,
   }

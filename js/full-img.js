@@ -1,17 +1,16 @@
 import {arrayOfObjectsPhoto} from './data.js';
 import {isEscEvent} from './utils.js';
 
-const parrentContainer = document.querySelector('.pictures');
-const fullImg = document.querySelector('.big-picture');
-const closedButton = fullImg.querySelector('.big-picture__cancel');
-const divWithImg = fullImg.querySelector('.big-picture__img');
-const likesCount = fullImg.querySelector('.social__comment-count');
-const loaderComment = fullImg.querySelector('.comments-loader');
-const likes = fullImg.querySelector('.likes-count');
-const socialImg = document.querySelectorAll('.social__picture');
-const commentText = document.querySelectorAll('.social__text');
-const description = document.querySelector('.social__caption')
-
+const parrentContainerElement = document.querySelector('.pictures');
+const fullImgElement = document.querySelector('.big-picture');
+const closedButtonElement = fullImgElement.querySelector('.big-picture__cancel');
+const bigImgElement = fullImgElement.querySelector('.big-picture__img');
+const commentCountElement = fullImgElement.querySelector('.social__comment-count');
+const loaderCommentElement = fullImgElement.querySelector('.comments-loader');
+const likesCountElement = fullImgElement.querySelector('.likes-count');
+const socialImgElement = document.querySelectorAll('.social__picture');
+const commentTextElement = document.querySelectorAll('.social__text');
+const descriptionElement = document.querySelector('.social__caption')
 
 
 
@@ -23,27 +22,25 @@ const onParentContainerClick = function(evt){
   }
 }
 
-
 const showBigPicture = function(){
   document.body.classList.add('modal-open');
-  fullImg.classList.remove('hidden');
-  loaderComment.classList.add('hidden');
-  likesCount.classList.add('hidden');
-
+  fullImgElement.classList.remove('hidden');
+  loaderCommentElement.classList.add('hidden');
+  commentCountElement.classList.add('hidden');
   document.addEventListener('keydown', onEscKeyDown);
 };
 
 const fillBigPucture = function(object){
-  divWithImg.childNodes[1].src = object.url;
-  likes.textContent = object.likes;
-  description.textContent = object.description;
+  bigImgElement.childNodes[1].src = object.url;
+  likesCountElement.textContent = object.likes;
+  descriptionElement.textContent = object.description;
 
 
-  commentText.forEach((item, i) => {
+  commentTextElement.forEach((item, i) => {
     item.textContent = object.comments[i].message;
   });
 
-  socialImg.forEach((item, i) => {
+  socialImgElement.forEach((item, i) => {
     item.alt = object.comments[i].name;
     item.src = object.comments[i].avatar
   });
@@ -56,14 +53,14 @@ const onEscKeyDown = function(evt){
 };
 
 const closeBigImg = function(){
-  fullImg.classList.add('hidden');
+  fullImgElement.classList.add('hidden');
   document.body.classList.remove('modal-open');
 };
 
-closedButton.addEventListener('click', function(){
+closedButtonElement.addEventListener('click', function(){
   document.removeEventListener('keydown', onEscKeyDown);
   closeBigImg();
 });
 
-parrentContainer.addEventListener('click', onParentContainerClick);
+parrentContainerElement.addEventListener('click', onParentContainerClick);
 
