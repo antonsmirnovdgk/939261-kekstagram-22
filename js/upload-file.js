@@ -1,6 +1,5 @@
 import {resetSlider} from './photos-effect.js';
 import {isEscEvent} from './utils.js';
-import {onFieldFocus} from './valid-hashtags.js';
 
 
 const uploadFieldElement = document.querySelector('#upload-file');
@@ -34,4 +33,16 @@ const onEscKeyDown = function(evt){
   if(isEscEvent(evt)){
     closeImg();
   }
+};
+
+//запрет закрытия поп-ап окна при фокусе на текстовом блоке
+const onFieldFocus = function(evt) {
+
+  evt.target.addEventListener('keydown', function(evt) {
+
+    if(isEscEvent(evt)) {
+      evt.preventDefault();
+      evt.stopPropagation();
+    }
+  });
 };

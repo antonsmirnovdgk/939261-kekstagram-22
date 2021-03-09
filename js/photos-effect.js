@@ -106,8 +106,6 @@ const effectMap = {
 };
 
 
-
-
 let filter = null; // название фильтра
 let unit = null; // единица измереиня
 
