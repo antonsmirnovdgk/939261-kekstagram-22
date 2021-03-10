@@ -1,7 +1,7 @@
 import {createPhotos} from './create-photo.js'
 
 
-fetch('https://22.javascript.pages.academy/kekstagram/dat')
+fetch('https://22.javascript.pages.academy/kekstagram/data')
   .then((response) => {
     if (response.ok){
       return response.json()

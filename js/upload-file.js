@@ -7,7 +7,7 @@ const uploadFieldElement = document.querySelector('#upload-file');
 const imgUploadElement = document.querySelector('.img-upload__overlay');
 const closeUploadButtonElement = document.querySelector('#upload-cancel');
 const allTextElement = document.querySelector('.img-upload__text');
-const uploadButtonElement = document.querySelector('.img-upload__sumbit');
+const uploadFormElement = document.querySelector('.img-upload__form');
 
 
 // Открытие поп-ап
@@ -39,6 +39,22 @@ const onEscKeyDown = function(evt){
 
 
 //Отправка файлов на сервер
-uploadButtonElement.addEventListener('submit', function(evt){
-  evt.preventDefault();
-})
+
+const uploadButton = (onSuccess) => {
+  uploadFormElement.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    const formData = new FormData(evt.target); //соберем данные формы
+
+    fetch(
+      'https://22.javascript.pages.academy/kekstagram',
+      {
+        method: 'POST',
+        body: formData,
+      },
+    );
+  });
+};
+
+
+export {uploadButton}
