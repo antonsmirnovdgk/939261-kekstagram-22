@@ -14,7 +14,6 @@ const descriptionElement = document.querySelector('.social__caption')
 
 
 
-
 const onParentContainerClick = function(evt){
   if(evt.target.parentNode.matches('a')) {
     const objectOfSmallPic = arrayOfObjectsPhoto.find((item) => +item.id === +evt.target.parentNode.id);
@@ -23,13 +22,11 @@ const onParentContainerClick = function(evt){
   }
 }
 
-
 const showBigPicture = function(){
   document.body.classList.add('modal-open');
   fullImgElement.classList.remove('hidden');
   loaderCommentElement.classList.add('hidden');
   commentCountElement.classList.add('hidden');
-
   document.addEventListener('keydown', onEscKeyDown);
 };
 

@@ -1,12 +1,13 @@
 // import {arrayOfObjectsPhoto} from './data.js';
-
+import {getData} from  './fetch.js'
 
 
 const picture_container = document.querySelector('.pictures');
 const similar_template = document.querySelector('#picture').content.querySelector('.picture');
 const fragment = document.createDocumentFragment();
-
-
+const successMessageElement = document.querySelector('#success').content.querySelector('.success');
+const mainElement = document.querySelector('main');
+const errMessageElement = document.querySelector('#error').content.querySelector('.error');
 
 
 const createPhotos = function(photos) {
@@ -25,16 +26,25 @@ const createPhotos = function(photos) {
 
 };
 
-// ошибка закгрузки
 
 
 
+const createSuccessMessage = function() {
+  const successMessageTemplate = successMessageElement.cloneNode(true);
+  mainElement.appendChild(successMessageTemplate);
 
-const createError = function(err) {
+  successMessageTemplate.addEventListener('click', function(){
+    successMessageTemplate.classList.add('hidden')
+  });
+};
 
+const createErrMessage = function() {
+  const errMessageTemplate = errMessageElement.cloneNode(true);
+  mainElement.appendChild(errMessageTemplate);
 }
 
 
 
-export{createPhotos};
+getData(createPhotos);
 
+export {createSuccessMessage, createErrMessage};

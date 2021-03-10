@@ -1,5 +1,5 @@
 import {resetScale} from './scale-photo.js';
-import {validateHashtags, validComment} from './valid-hashtags.js';
+import {validateHashtags} from './valid-hashtags.js';
 
 
 const bigImgUploadElement = document.querySelector('.img-upload__preview');
@@ -12,7 +12,6 @@ const sliderLevelElement = document.querySelector('.effect-level');
 
 const resetSlider = function(){
   resetScale();
-  validComment();
   validateHashtags();
   bigImgUploadElement.style.filter = 'none';
   sliderLevelElement.classList.add('visually-hidden');
@@ -107,14 +106,11 @@ const effectMap = {
 };
 
 
-
-
 let filter = null; // название фильтра
 let unit = null; // единица измереиня
 
 
 const onParrentUploadContaierCLick = function({target}){
-
 
   if(target.id === 'effect-none') {
     resetSlider();

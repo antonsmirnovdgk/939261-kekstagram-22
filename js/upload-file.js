@@ -1,6 +1,9 @@
+import {sendData} from './fetch.js';
 import {resetSlider} from './photos-effect.js';
 import {isEscEvent} from './utils.js';
-import {onFieldFocus} from './valid-hashtags.js';
+import {fieldHashtagElement} from './valid-hashtags.js';
+import {createErrMessage} from './create-photo.js';
+
 
 
 const uploadFieldElement = document.querySelector('#upload-file');
@@ -8,6 +11,8 @@ const imgUploadElement = document.querySelector('.img-upload__overlay');
 const closeUploadButtonElement = document.querySelector('#upload-cancel');
 const allTextElement = document.querySelector('.img-upload__text');
 const uploadFormElement = document.querySelector('.img-upload__form');
+const commentFieldElement = document.querySelector('.text__description');
+
 
 
 // Открытие поп-ап
@@ -22,13 +27,16 @@ uploadFieldElement.addEventListener('change', function(){
 
 //закрытие поп-ап
 closeUploadButtonElement.addEventListener('click', function(){
-  document.removeEventListener('keydown', onEscKeyDown);
   closeImg();
 });
 
 const closeImg = function(){
+  resetSlider();
   imgUploadElement.classList.add('hidden');
   document.body.classList.remove('modal-open');
+  document.removeEventListener('keydown', onEscKeyDown);
+  fieldHashtagElement.value = '';
+  commentFieldElement.value = '';
 }
 
 const onEscKeyDown = function(evt){
@@ -38,23 +46,31 @@ const onEscKeyDown = function(evt){
 };
 
 
+//запрет закрытия поп-ап окна при фокусе на текстовом блоке
+const onFieldFocus = function(evt) {
+
+  evt.target.addEventListener('keydown', function(evt) {
+
+    if(isEscEvent(evt)) {
+      evt.preventDefault();
+      evt.stopPropagation();
+    }
+  });
+};
+
 //Отправка файлов на сервер
 
 const uploadButton = (onSuccess) => {
   uploadFormElement.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
-    const formData = new FormData(evt.target); //соберем данные формы
-
-    fetch(
-      'https://22.javascript.pages.academy/kekstagram',
-      {
-        method: 'POST',
-        body: formData,
-      },
-    );
+    sendData (
+      () => onSuccess(),
+      () => createErrMessage(),
+      new FormData(evt.target),
+    )
   });
-};
+}
 
+uploadButton(closeImg);
 
-export {uploadButton}
