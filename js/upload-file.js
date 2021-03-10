@@ -7,6 +7,7 @@ const uploadFieldElement = document.querySelector('#upload-file');
 const imgUploadElement = document.querySelector('.img-upload__overlay');
 const closeUploadButtonElement = document.querySelector('#upload-cancel');
 const allTextElement = document.querySelector('.img-upload__text');
+const uploadButtonElement = document.querySelector('.img-upload__sumbit');
 
 
 // Открытие поп-ап
@@ -35,3 +36,9 @@ const onEscKeyDown = function(evt){
     closeImg();
   }
 };
+
+
+//Отправка файлов на сервер
+uploadButtonElement.addEventListener('submit', function(evt){
+  evt.preventDefault();
+})

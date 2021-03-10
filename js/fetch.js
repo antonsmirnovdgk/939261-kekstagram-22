@@ -1,5 +1,6 @@
 import {createPhotos} from './create-photo.js'
 
+
 fetch('https://22.javascript.pages.academy/kekstagram/dat')
   .then((response) => {
     if (response.ok){
