@@ -1,4 +1,4 @@
-import {createSuccessMessage} from './create-photo.js'
+import {createSuccessMessage, createErrMessage} from './create-photo.js'
 
 const getData = (onSuccess) => {
   fetch('https://22.javascript.pages.academy/kekstagram/data')
@@ -23,7 +23,7 @@ const getData = (onSuccess) => {
 
 const sendData = (onSuccess, onFail, body) => {
   fetch(
-    'https://22.javascript.pages.academy/404',
+    'https://22.javascript.pages.academy/kekstagram',
     {
       method: 'POST',
       body,
@@ -35,10 +35,12 @@ const sendData = (onSuccess, onFail, body) => {
         createSuccessMessage();
       } else {
         onFail();
+        createErrMessage();
       }
     })
     .catch(() => {
       onFail();
+      createErrMessage();
     });
 };
 

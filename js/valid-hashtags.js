@@ -14,12 +14,16 @@ const validateHashtags = function() {
 
     if(hashtagsArray.length > MAX_HASHTAGS){
       fieldHashtagElement.setCustomValidity('Кол-во хэштегов не может превышать 5-ти')
+      fieldHashtagElement.classList.add('error-validate');
     } else if(isInvalidHashtagInArray){
-      fieldHashtagElement.setCustomValidity('Хэштеги не могут содержать цифры, знаки, эмодзи и начинаться с #')
+      fieldHashtagElement.setCustomValidity('Хэштеги не могут содержать цифры, знаки, эмодзи и начинаться с #');
+      fieldHashtagElement.classList.add('error-validate');
     } else if(isDuplicateHashtagInArray){
       fieldHashtagElement.setCustomValidity('Хэштеги недолжны повторяться')
+      fieldHashtagElement.classList.add('error-validate');
     } else {
       fieldHashtagElement.setCustomValidity('')
+      fieldHashtagElement.classList.remove('error-validate');
     }
 
     fieldHashtagElement.reportValidity();

@@ -10,6 +10,8 @@ const sliderLevelElement = document.querySelector('.effect-level');
 
 
 
+
+
 const resetSlider = function(){
   resetScale();
   validateHashtags();
@@ -118,6 +120,7 @@ const onParrentUploadContaierCLick = function({target}){
   } else {
     sliderLevelElement.classList.remove('visually-hidden');
   }
+
 
   filter = effectMap[target.value].filter;
   unit = effectMap[target.value].unit;

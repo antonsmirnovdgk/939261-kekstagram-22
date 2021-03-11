@@ -2,7 +2,7 @@ import {sendData} from './fetch.js';
 import {resetSlider} from './photos-effect.js';
 import {isEscEvent} from './utils.js';
 import {fieldHashtagElement} from './valid-hashtags.js';
-import {createErrMessage} from './create-photo.js';
+
 
 
 
@@ -30,13 +30,20 @@ closeUploadButtonElement.addEventListener('click', function(){
   closeImg();
 });
 
+
+
+//функция сброса настроек поп-ап окна
+const resetPopUp = function(){
+  fieldHashtagElement.value = '';
+  commentFieldElement.value = '';
+}
+
 const closeImg = function(){
   resetSlider();
+  resetPopUp();
   imgUploadElement.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onEscKeyDown);
-  fieldHashtagElement.value = '';
-  commentFieldElement.value = '';
 }
 
 const onEscKeyDown = function(evt){
@@ -60,17 +67,17 @@ const onFieldFocus = function(evt) {
 
 //Отправка файлов на сервер
 
-const uploadButton = (onSuccess) => {
+const uploadButton = (onSuccess, onFail) => {
   uploadFormElement.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
     sendData (
       () => onSuccess(),
-      () => createErrMessage(),
+      () => onFail(),
       new FormData(evt.target),
     )
   });
 }
 
-uploadButton(closeImg);
+uploadButton(closeImg, closeImg);
 
