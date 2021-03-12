@@ -3,17 +3,12 @@ import {resetSlider} from './photos-effect.js';
 import {isEscEvent} from './utils.js';
 import {fieldHashtagElement} from './valid-hashtags.js';
 
-
-
-
 const uploadFieldElement = document.querySelector('#upload-file');
 const imgUploadElement = document.querySelector('.img-upload__overlay');
 const closeUploadButtonElement = document.querySelector('#upload-cancel');
 const allTextElement = document.querySelector('.img-upload__text');
 const uploadFormElement = document.querySelector('.img-upload__form');
 const commentFieldElement = document.querySelector('.text__description');
-
-
 
 // Открытие поп-ап
 uploadFieldElement.addEventListener('change', function(){
@@ -24,13 +19,10 @@ uploadFieldElement.addEventListener('change', function(){
   imgUploadElement.classList.remove('hidden');
 });
 
-
 //закрытие поп-ап
 closeUploadButtonElement.addEventListener('click', function(){
   closeImg();
 });
-
-
 
 //функция сброса настроек поп-ап окна
 const resetPopUp = function(){
@@ -80,4 +72,3 @@ const uploadButton = (onSuccess, onFail) => {
 }
 
 uploadButton(closeImg, closeImg);
-

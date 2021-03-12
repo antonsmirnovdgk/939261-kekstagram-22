@@ -34,13 +34,7 @@ const createPhotos = function(photos) {
 
 const createSuccessMessage = function() {
   const successMessageTemplate = successMessageElement.cloneNode(true);
-  const buttonCloseElement = successMessageTemplate.querySelector('.success__button');
   mainElement.appendChild(successMessageTemplate);
-
-  buttonCloseElement.addEventListener('click', function() {
-    onSuccessButtonClick();
-  });
-
 
   const onEscKeyDown = function(evt){
     if(isEscEvent(evt)){
@@ -48,23 +42,25 @@ const createSuccessMessage = function() {
     }
   };
 
-
   document.addEventListener('keydown', onEscKeyDown);
 
-  document.addEventListener('click', function(){
-    successMessageTemplate.classList.add('hidden')
-    buttonCloseElement.removeEventListener('click', function(){});
-    document.removeEventListener('click', function(){});
-    document.removeEventListener('keydown', onEscKeyDown);
-  });
+  const onDocumentClick = function(evt) {
 
+    if (evt.target.className === 'error' ||  evt.target.className === 'error__button') {
+
+      successMessageTemplate.classList.add('hidden')
+      document.removeEventListener('keydown', onEscKeyDown);
+      document.removeEventListener('click', onDocumentClick);
+    }
+  }
+
+  document.addEventListener('click', onDocumentClick);
 
   const onSuccessButtonClick = function(){
     successMessageTemplate.classList.add('hidden');
     document.removeEventListener('keydown', onEscKeyDown);
-    document.removeEventListener('click', function(){});
+    document.removeEventListener('click', onDocumentClick);
   }
-
 };
 
 
@@ -72,10 +68,7 @@ const createSuccessMessage = function() {
 
 const createErrMessage = function() {
   const errMessageTemplate = errMessageElement.cloneNode(true);
-  const errButtonCloseElement = errMessageTemplate.querySelector('.error__button');
   mainElement.appendChild(errMessageTemplate);
-
-
 
   const onEscKeyDown = function(evt){
     if(isEscEvent(evt)){
@@ -83,31 +76,25 @@ const createErrMessage = function() {
     }
   };
 
-
-  document.addEventListener('keydown', onEscKeyDown);
-  errButtonCloseElement.addEventListener('click', function(){
-    onErrButtonClose();
-  })
-
-
   const onErrButtonClose = function(){
     errMessageTemplate.classList.add('hidden');
     document.removeEventListener('keydown', onEscKeyDown);
-    errButtonCloseElement.removeEventListener('click', function(){});
+    document.removeEventListener('click', onDocumentClick);
   }
 
-  document.addEventListener('click', function(){
-    errMessageTemplate.classList.add('hidden')
-    errButtonCloseElement.removeEventListener('click', function(){});
-    document.removeEventListener('click', function(){});
-    document.removeEventListener('keydown', onEscKeyDown);
-  });
+  const onDocumentClick = function(evt) {
 
+    if (evt.target.className === 'error' || evt.target.className === 'error__button') {
 
+      errMessageTemplate.classList.add('hidden')
+      document.removeEventListener('keydown', onEscKeyDown);
+      document.removeEventListener('click', onDocumentClick);
+    }
+  }
 
+  document.addEventListener('keydown', onEscKeyDown);
+  document.addEventListener('click', onDocumentClick);
 }
-
-
 
 getData(createPhotos);
 

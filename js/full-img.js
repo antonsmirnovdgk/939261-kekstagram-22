@@ -12,8 +12,6 @@ const socialImgElement = document.querySelectorAll('.social__picture');
 const commentTextElement = document.querySelectorAll('.social__text');
 const descriptionElement = document.querySelector('.social__caption')
 
-
-
 const onParentContainerClick = function(evt){
   if(evt.target.parentNode.matches('a')) {
     const objectOfSmallPic = arrayOfObjectsPhoto.find((item) => +item.id === +evt.target.parentNode.id);
