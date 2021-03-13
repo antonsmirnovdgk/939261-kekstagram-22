@@ -28,8 +28,6 @@ const createPhotos = function(photos) {
 
 };
 
-
-
 // Шаблон успешной загрузки данных
 
 const createSuccessMessage = function() {
@@ -46,7 +44,7 @@ const createSuccessMessage = function() {
 
   const onDocumentClick = function(evt) {
 
-    if (evt.target.className === 'error' ||  evt.target.className === 'error__button') {
+    if (evt.target.className === 'error' ||  'error__button') {
 
       successMessageTemplate.classList.add('hidden')
       document.removeEventListener('keydown', onEscKeyDown);
@@ -76,24 +74,23 @@ const createErrMessage = function() {
     }
   };
 
-  const onErrButtonClose = function(){
-    errMessageTemplate.classList.add('hidden');
-    document.removeEventListener('keydown', onEscKeyDown);
-    document.removeEventListener('click', onDocumentClick);
-  }
+  document.addEventListener('keydown', onEscKeyDown);
+  document.addEventListener('click', onDocumentClick);
 
   const onDocumentClick = function(evt) {
 
     if (evt.target.className === 'error' || evt.target.className === 'error__button') {
-
       errMessageTemplate.classList.add('hidden')
       document.removeEventListener('keydown', onEscKeyDown);
       document.removeEventListener('click', onDocumentClick);
     }
   }
 
-  document.addEventListener('keydown', onEscKeyDown);
-  document.addEventListener('click', onDocumentClick);
+  const onErrButtonClose = function(){
+    errMessageTemplate.classList.add('hidden');
+    document.removeEventListener('keydown', onEscKeyDown);
+    document.removeEventListener('click', onDocumentClick);
+  }
 }
 
 getData(createPhotos);
