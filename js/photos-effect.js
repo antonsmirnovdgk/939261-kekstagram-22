@@ -104,7 +104,6 @@ const effectMap = {
 let filter = null; // название фильтра
 let unit = null; // единица измереиня
 
-
 const onParrentUploadContaierCLick = function({target}){
 
   if(target.id === 'effect-none') {

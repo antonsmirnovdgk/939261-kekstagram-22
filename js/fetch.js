@@ -1,16 +1,16 @@
-import {createSuccessMessage, createErrMessage} from './create-photo.js'
+// const ERROR_GET_DATA = 'https://22.javascript.pages.academy/kekstagram/404';
+const GET_DATA_ADDRESS = 'https://22.javascript.pages.academy/kekstagram/data';
+const SENT_DATA_ADDRESS = 'https://22.javascript.pages.academy/kekstagram';
 
 const getData = (onSuccess) => {
-  fetch('https://22.javascript.pages.academy/kekstagram/data')
+  fetch(GET_DATA_ADDRESS)
 
     .then((response) => {
       if(response.ok) {
         return response.json()
       }
-
       throw new Error(`${response.status} ${response.statusText}`);
     })
-
     .then((createPhotos) => {
       onSuccess(createPhotos);
     })
@@ -21,7 +21,7 @@ const getData = (onSuccess) => {
 
 const sendData = (onSuccess, onFail, body) => {
   fetch(
-    'https://22.javascript.pages.academy/kekstagram',
+    SENT_DATA_ADDRESS,
     {
       method: 'POST',
       body,
@@ -30,15 +30,12 @@ const sendData = (onSuccess, onFail, body) => {
     .then((response) => {
       if(response.ok){
         onSuccess();
-        createSuccessMessage();
       } else {
         onFail();
-        createErrMessage();
       }
     })
     .catch(() => {
       onFail();
-      createErrMessage();
     });
 };
 
