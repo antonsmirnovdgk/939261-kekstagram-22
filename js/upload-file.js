@@ -59,6 +59,14 @@ const onFieldFocus = function(evt) {
 
 //Отправка файлов на сервер
 
+// const onUploadFormSubmit = (evt) => {
+//   evt.preventDefault();
+//   const formData = new FormData(form) сюда лучше передать саму форму. В evt.target кажется попадает элемент по которому был клик. Может не корректно обработать
+//   sendData(onSuccess, onFail, formData);
+// }
+
+// uploadFormElement.addEventListener('submit', onUploadFormSubmit)
+
 const uploadButton = (onSuccess, onFail) => {
   uploadFormElement.addEventListener('submit', (evt) => {
     evt.preventDefault();

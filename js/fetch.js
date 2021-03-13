@@ -1,4 +1,6 @@
-import {createSuccessMessage, createErrMessage} from './create-photo.js'
+import {createSuccessMessage, createErrMessage} from './create-photo.js';
+import {showImgFilterElement} from './img-filters.js';
+
 
 const getData = (onSuccess) => {
   fetch('https://22.javascript.pages.academy/kekstagram/data')
@@ -13,6 +15,9 @@ const getData = (onSuccess) => {
 
     .then((createPhotos) => {
       onSuccess(createPhotos);
+    })
+    .then(() => {
+      showImgFilterElement();
     })
     .catch((err) => {
       alert(`${err}` + '\n' + 'Неудалось загрузить данные с сервера');
