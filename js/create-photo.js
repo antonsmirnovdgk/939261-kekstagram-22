@@ -44,7 +44,7 @@ const createSuccessMessage = function() {
 
   const onDocumentClick = function(evt) {
 
-    if (evt.target.className === 'error' ||  'error__button') {
+    if (evt.target.className === 'error' ||  evt.target.className === 'error__button') {
 
       successMessageTemplate.classList.add('hidden')
       document.removeEventListener('keydown', onEscKeyDown);

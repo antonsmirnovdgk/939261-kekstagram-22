@@ -71,4 +71,4 @@ const uploadButton = (onSuccess, onFail) => {
   });
 }
 
-uploadButton(closeImg, closeImg);
+uploadButton(closeImg);
