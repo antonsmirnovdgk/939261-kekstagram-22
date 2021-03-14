@@ -1,4 +1,5 @@
 import {showImgFilterElement} from './img-filters.js';
+// import {getRandomnElements} from './img-filters.js';
 
 // const ERROR_GET_DATA = 'https://22.javascript.pages.academy/kekstagram/404';
 const GET_DATA_ADDRESS = 'https://22.javascript.pages.academy/kekstagram/data';
