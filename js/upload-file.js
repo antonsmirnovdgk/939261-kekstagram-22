@@ -2,6 +2,7 @@ import {sendData} from './fetch.js';
 import {resetSlider} from './photos-effect.js';
 import {isEscEvent} from './utils.js';
 import {fieldHashtagElement} from './valid-hashtags.js';
+import {createSuccessMessage, createErrMessage} from './create-photo.js'
 
 const uploadFieldElement = document.querySelector('#upload-file');
 const imgUploadElement = document.querySelector('.img-upload__overlay');
@@ -44,7 +45,6 @@ const onEscKeyDown = function(evt){
   }
 };
 
-
 //запрет закрытия поп-ап окна при фокусе на текстовом блоке
 const onFieldFocus = function(evt) {
 
@@ -58,25 +58,11 @@ const onFieldFocus = function(evt) {
 };
 
 //Отправка файлов на сервер
-
-// const onUploadFormSubmit = (evt) => {
-//   evt.preventDefault();
-//   const formData = new FormData(form) сюда лучше передать саму форму. В evt.target кажется попадает элемент по которому был клик. Может не корректно обработать
-//   sendData(onSuccess, onFail, formData);
-// }
-
-// uploadFormElement.addEventListener('submit', onUploadFormSubmit)
-
-const uploadButton = (onSuccess, onFail) => {
-  uploadFormElement.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-
-    sendData (
-      () => onSuccess(),
-      () => onFail(),
-      new FormData(evt.target),
-    )
-  });
+const onUploadFormSubmit = (evt) => {
+  evt.preventDefault();
+  closeImg();
+  const formData = new FormData(evt.target);
+  sendData(createSuccessMessage, createErrMessage, formData);
 }
 
-uploadButton(closeImg, closeImg);
+uploadFormElement.addEventListener('submit', onUploadFormSubmit)

@@ -13,7 +13,6 @@ const COMMENTS = [' Всё отлично!',
 const DESCRIPTIONS = ['Кот-суши', 'Закат', 'Озеро', 'Очень красивые глаза', 'Супер-кар'];
 
 //Объект фотокарточки
-
 const createObjectOfPhoto = function(index) {
   return {
     id: index + 1,
@@ -25,7 +24,6 @@ const createObjectOfPhoto = function(index) {
 };
 
 //Объект коментарий
-
 const createCommentObject = function(index) {
   return {
     id: index + 1,
@@ -35,9 +33,7 @@ const createCommentObject = function(index) {
   }
 };
 
-
 const arrayOfComments = new Array(OBJECT_COMMENT_COUNT).fill(null).map((_, index) => createCommentObject(index));
-
 const arrayOfObjectsPhoto = new Array(OBJECT_COUNT).fill(null).map((_, index) => createObjectOfPhoto(index));
 
 export {arrayOfObjectsPhoto};
