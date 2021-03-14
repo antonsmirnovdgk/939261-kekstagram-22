@@ -61,4 +61,3 @@ closedButtonElement.addEventListener('click', function(){
 });
 
 parrentContainerElement.addEventListener('click', onParentContainerClick);
-

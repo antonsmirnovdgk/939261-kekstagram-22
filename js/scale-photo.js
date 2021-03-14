@@ -7,13 +7,10 @@ const STEP = 25;
 const SCALE_BUTTOM = 25;
 const SCALE_TOP = 100;
 
-
-
 const resetScale = function(){
   valueField.value =`${SCALE_TOP}%`;
   bigImg.style.transform = 'none';
 }
-
 
 valueField.value = `${SCALE_TOP}%`;
 
