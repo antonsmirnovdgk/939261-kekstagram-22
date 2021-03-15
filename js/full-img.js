@@ -1,5 +1,8 @@
-import {arrayOfObjectsPhoto} from './data.js';
+// import {arrayOfObjectsPhoto} from './data.js';
 import {isEscEvent} from './utils.js';
+import {arrayOfPhotos} from './create-photo.js';
+
+
 
 const parrentContainerElement = document.querySelector('.pictures');
 const fullImgElement = document.querySelector('.big-picture');
@@ -14,11 +17,13 @@ const descriptionElement = document.querySelector('.social__caption')
 
 const onParentContainerClick = function(evt){
   if(evt.target.parentNode.matches('a')) {
-    const objectOfSmallPic = arrayOfObjectsPhoto.find((item) => +item.id === +evt.target.parentNode.id);
+    const objectOfSmallPic = arrayOfPhotos.find((item) => +item.id === +evt.target.parentNode.id);
     fillBigPucture(objectOfSmallPic);
     showBigPicture();
   }
 }
+
+
 
 const showBigPicture = function(){
   document.body.classList.add('modal-open');

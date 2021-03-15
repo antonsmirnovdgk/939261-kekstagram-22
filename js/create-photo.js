@@ -9,6 +9,8 @@ const successMessageElement = document.querySelector('#success').content.querySe
 const mainElement = document.querySelector('main');
 const errMessageElement = document.querySelector('#error').content.querySelector('.error');
 
+const arrayOfPhotos = [];
+
 const createPhotos = function(photos) {
   photos.forEach((item) => {
     const pictureTemplate = similarTemplate.cloneNode(true);
@@ -17,9 +19,12 @@ const createPhotos = function(photos) {
     pictureTemplate.querySelector('.picture__comments').textContent = item.message;
     pictureTemplate.id = item.id;
     fragment.appendChild(pictureTemplate);
+
+    arrayOfPhotos.push(item);
   });
   pictureContainer.appendChild(fragment);
 };
+
 
 // Шаблон успешной загрузки данных
 const createSuccessMessage = function() {
@@ -88,4 +93,4 @@ const createErrMessage = function() {
 
 getData(createPhotos);
 
-export {createSuccessMessage, createErrMessage};
+export {createSuccessMessage, createErrMessage, arrayOfPhotos};

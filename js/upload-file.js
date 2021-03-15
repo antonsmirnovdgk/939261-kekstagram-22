@@ -37,6 +37,7 @@ const closeImg = function(){
   imgUploadElement.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onEscKeyDown);
+  uploadFieldElement.value = '';
 }
 
 const onEscKeyDown = function(evt){
