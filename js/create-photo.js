@@ -10,7 +10,6 @@ const mainElement = document.querySelector('main');
 const errMessageElement = document.querySelector('#error').content.querySelector('.error');
 
 const createPhotos = function(photos) {
-
   photos.forEach((item) => {
     const pictureTemplate = similarTemplate.cloneNode(true);
     pictureTemplate.querySelector('.picture__img').src = item.url;
