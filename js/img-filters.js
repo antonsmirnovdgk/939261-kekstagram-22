@@ -1,7 +1,7 @@
 import {getRandomNum} from './utils.js';
 
-const imgFilterElement = document.querySelector('.img-filters');
-const filterRandomElement = document.querySelector('#filter-random');
+// const imgFilterElement = document.querySelector('.img-filters');
+// const filterRandomElement = document.querySelector('#filter-random');
 
 // const imgFilterFormElement = document.querySelector('.img-filters__form');
 
