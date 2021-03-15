@@ -2,8 +2,8 @@
 import {getData} from  './fetch.js';
 import {isEscEvent} from './utils.js';
 
-const picture_container = document.querySelector('.pictures');
-const similar_template = document.querySelector('#picture').content.querySelector('.picture');
+const pictureContainer = document.querySelector('.pictures');
+const similarTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const fragment = document.createDocumentFragment();
 const successMessageElement = document.querySelector('#success').content.querySelector('.success');
 const mainElement = document.querySelector('main');
@@ -12,14 +12,14 @@ const errMessageElement = document.querySelector('#error').content.querySelector
 const createPhotos = function(photos) {
 
   photos.forEach((item) => {
-    const picture_template = similar_template.cloneNode(true);
-    picture_template.querySelector('.picture__img').src = item.url;
-    picture_template.querySelector('.picture__likes').textContent = item.likes;
-    picture_template.querySelector('.picture__comments').textContent = item.message;
-    picture_template.id = item.id;
-    fragment.appendChild(picture_template);
+    const pictureTemplate = similarTemplate.cloneNode(true);
+    pictureTemplate.querySelector('.picture__img').src = item.url;
+    pictureTemplate.querySelector('.picture__likes').textContent = item.likes;
+    pictureTemplate.querySelector('.picture__comments').textContent = item.message;
+    pictureTemplate.id = item.id;
+    fragment.appendChild(pictureTemplate);
   });
-  picture_container.appendChild(fragment);
+  pictureContainer.appendChild(fragment);
 };
 
 // Шаблон успешной загрузки данных
