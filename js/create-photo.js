@@ -89,4 +89,4 @@ const createErrMessage = function() {
 
 getData(createPhotos);
 
-export {createSuccessMessage, createErrMessage};
+export {createSuccessMessage, createErrMessage, createPhotos};
