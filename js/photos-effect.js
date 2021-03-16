@@ -1,25 +1,22 @@
 import {resetScale} from './scale-photo.js';
 import {validateHashtags} from './valid-hashtags.js';
 
-
 const bigImgUploadElement = document.querySelector('.img-upload__preview');
 const effectFieldElement = document.querySelector('.effect-level__slider');
 const effectValueElement = document.querySelector('.effect-level__value');
 const formImgUploadElement = document.querySelector('.img-upload__effects');
 const sliderLevelElement = document.querySelector('.effect-level');
-
-
+const checkboxDefaultElement = document.querySelector('#effect-none');
 
 const resetSlider = function(){
   resetScale();
+  checkboxDefaultElement.checked = true;
   validateHashtags();
   bigImgUploadElement.style.filter = 'none';
   sliderLevelElement.classList.add('visually-hidden');
 }
 
-
 /* global noUiSlider:readonly */
-
 noUiSlider.create(effectFieldElement, {
   range: {
     min: 0,
@@ -30,9 +27,7 @@ noUiSlider.create(effectFieldElement, {
   connect: 'lower',
 });
 
-
 document.querySelector('.effect-level').classList.add('visually-hidden')
-
 
 const effectMap = {
   none: {
@@ -109,9 +104,7 @@ const effectMap = {
 let filter = null; // название фильтра
 let unit = null; // единица измереиня
 
-
 const onParrentUploadContaierCLick = function({target}){
-
 
   if(target.id === 'effect-none') {
     resetSlider();
@@ -123,7 +116,6 @@ const onParrentUploadContaierCLick = function({target}){
   filter = effectMap[target.value].filter;
   unit = effectMap[target.value].unit;
 
-
   effectFieldElement.noUiSlider.updateOptions(effectMap[target.value].options);
 
   effectFieldElement.noUiSlider.on('update', (values, handle) => {
@@ -133,6 +125,5 @@ const onParrentUploadContaierCLick = function({target}){
 };
 
 formImgUploadElement.addEventListener('change', onParrentUploadContaierCLick);
-
 
 export {resetSlider};

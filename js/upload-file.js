@@ -1,12 +1,15 @@
+import {sendData} from './fetch.js';
 import {resetSlider} from './photos-effect.js';
 import {isEscEvent} from './utils.js';
-
+import {fieldHashtagElement} from './valid-hashtags.js';
+import {createSuccessMessage, createErrMessage} from './create-photo.js'
 
 const uploadFieldElement = document.querySelector('#upload-file');
 const imgUploadElement = document.querySelector('.img-upload__overlay');
 const closeUploadButtonElement = document.querySelector('#upload-cancel');
 const allTextElement = document.querySelector('.img-upload__text');
-
+const uploadFormElement = document.querySelector('.img-upload__form');
+const commentFieldElement = document.querySelector('.text__description');
 
 // Открытие поп-ап
 uploadFieldElement.addEventListener('change', function(){
@@ -17,16 +20,24 @@ uploadFieldElement.addEventListener('change', function(){
   imgUploadElement.classList.remove('hidden');
 });
 
-
 //закрытие поп-ап
 closeUploadButtonElement.addEventListener('click', function(){
-  document.removeEventListener('keydown', onEscKeyDown);
   closeImg();
 });
 
+//функция сброса настроек поп-ап окна
+const resetPopUp = function(){
+  fieldHashtagElement.value = '';
+  commentFieldElement.value = '';
+}
+
 const closeImg = function(){
+  resetSlider();
+  resetPopUp();
   imgUploadElement.classList.add('hidden');
   document.body.classList.remove('modal-open');
+  document.removeEventListener('keydown', onEscKeyDown);
+  uploadFieldElement.value = '';
 }
 
 const onEscKeyDown = function(evt){
@@ -46,3 +57,13 @@ const onFieldFocus = function(evt) {
     }
   });
 };
+
+//Отправка файлов на сервер
+const onUploadFormSubmit = (evt) => {
+  evt.preventDefault();
+  closeImg();
+  const formData = new FormData(evt.target);
+  sendData(createSuccessMessage, createErrMessage, formData);
+}
+
+uploadFormElement.addEventListener('submit', onUploadFormSubmit)
