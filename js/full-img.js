@@ -13,7 +13,10 @@ const loaderCommentElement = fullImgElement.querySelector('.comments-loader');
 const likesCountElement = fullImgElement.querySelector('.likes-count');
 const socialImgElement = document.querySelectorAll('.social__picture');
 const commentTextElement = document.querySelectorAll('.social__text');
-const descriptionElement = document.querySelector('.social__caption')
+const descriptionElement = document.querySelector('.social__caption');
+const commentsCount = fullImgElement.querySelector('.comments-count');
+
+
 
 const onParentContainerClick = function(evt){
   if(evt.target.parentNode.matches('a')) {
@@ -23,37 +26,47 @@ const onParentContainerClick = function(evt){
   }
 }
 
+
+const createComment = function(object){
+  return `<li class="social__comment">
+  <img
+    class="social__picture"
+    src="${object.avatar}"
+    alt="${object.name}"
+    width="35" height="35">
+   <p class="social__text">
+   ${object.message}
+   </p>
+  </li>`
+}
+
 const showBigPicture = function(){
   document.body.classList.add('modal-open');
   fullImgElement.classList.remove('hidden');
-  loaderCommentElement.classList.add('hidden');
-  commentCountElement.classList.add('hidden');
+  // loaderCommentElement.classList.add('hidden');
+  // commentCountElement.classList.add('hidden');
   document.addEventListener('keydown', onEscKeyDown);
 };
 
 const fillBigPucture = function(object){
 
+  const socialComments = fullImgElement.querySelector('.social__comments');
+
+
   bigImgElement.childNodes[1].src = object.url;
   likesCountElement.textContent = object.likes;
   descriptionElement.textContent = object.description;
+  commentsCount.textContent = object.comments.length;
 
-  window.console.log(object);
+  window.console.log(object.comments);
 
-  object.comments.forEach((item) => {
-    commentTextElement.textContent = item.message;
-    window.console.log(item.name[object.comments]);
-    socialImgElement.alt = item.name;
-    socialImgElement.src = item.avatar;
-  })
 
-  // commentTextElement.forEach((item, i) => {
-  //   item.textContent = object.comments[i].message;
-  // });
+  const commentsArray = object.comments.map(function(currentValue) {
+    return createComment(currentValue)
+  });
 
-  // socialImgElement.forEach((item, i) => {
-  //   item.alt = object.comments[i].name;
-  //   item.src = object.comments[i].avatar
-  // });
+  socialComments.innerHTML = commentsArray.join('');
+
 };
 
 
