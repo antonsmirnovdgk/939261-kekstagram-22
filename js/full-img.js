@@ -23,8 +23,6 @@ const onParentContainerClick = function(evt){
   }
 }
 
-
-
 const showBigPicture = function(){
   document.body.classList.add('modal-open');
   fullImgElement.classList.remove('hidden');
@@ -34,20 +32,30 @@ const showBigPicture = function(){
 };
 
 const fillBigPucture = function(object){
+
   bigImgElement.childNodes[1].src = object.url;
   likesCountElement.textContent = object.likes;
   descriptionElement.textContent = object.description;
 
+  window.console.log(object);
 
-  commentTextElement.forEach((item, i) => {
-    item.textContent = object.comments[i].message;
-  });
+  object.comments.forEach((item) => {
+    commentTextElement.textContent = item.message;
+    window.console.log(item.name[object.comments]);
+    socialImgElement.alt = item.name;
+    socialImgElement.src = item.avatar;
+  })
 
-  socialImgElement.forEach((item, i) => {
-    item.alt = object.comments[i].name;
-    item.src = object.comments[i].avatar
-  });
+  // commentTextElement.forEach((item, i) => {
+  //   item.textContent = object.comments[i].message;
+  // });
+
+  // socialImgElement.forEach((item, i) => {
+  //   item.alt = object.comments[i].name;
+  //   item.src = object.comments[i].avatar
+  // });
 };
+
 
 const onEscKeyDown = function(evt){
   if(isEscEvent(evt)){
