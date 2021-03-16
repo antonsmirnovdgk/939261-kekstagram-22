@@ -19,7 +19,6 @@ const onFilterFormClick = function(evt){
 imgFilterFormElement.addEventListener('click', onFilterFormClick);
 
 
-
 // Показать блок с филтром
 const showImgFilterElement = function(){
   imgFilterElement.classList.remove('img-filters--inactive');
