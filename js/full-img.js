@@ -8,11 +8,11 @@ const parrentContainerElement = document.querySelector('.pictures');
 const fullImgElement = document.querySelector('.big-picture');
 const closedButtonElement = fullImgElement.querySelector('.big-picture__cancel');
 const bigImgElement = fullImgElement.querySelector('.big-picture__img');
-const commentCountElement = fullImgElement.querySelector('.social__comment-count');
-const loaderCommentElement = fullImgElement.querySelector('.comments-loader');
+// const commentCountElement = fullImgElement.querySelector('.social__comment-count');
+// const loaderCommentElement = fullImgElement.querySelector('.comments-loader');
 const likesCountElement = fullImgElement.querySelector('.likes-count');
-const socialImgElement = document.querySelectorAll('.social__picture');
-const commentTextElement = document.querySelectorAll('.social__text');
+// const socialImgElement = document.querySelectorAll('.social__picture');
+// const commentTextElement = document.querySelectorAll('.social__text');
 const descriptionElement = document.querySelector('.social__caption');
 const commentsCount = fullImgElement.querySelector('.comments-count');
 
