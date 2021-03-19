@@ -8,7 +8,7 @@ const formImgUploadElement = document.querySelector('.img-upload__effects');
 const sliderLevelElement = document.querySelector('.effect-level');
 const checkboxDefaultElement = document.querySelector('#effect-none');
 
-const resetSlider = function(){
+const resetSlider = () => {
   resetScale();
   checkboxDefaultElement.checked = true;
   validateHashtags();
@@ -104,7 +104,7 @@ const effectMap = {
 let filter = null; // название фильтра
 let unit = null; // единица измереиня
 
-const onParrentUploadContaierCLick = function({target}){
+const onParrentUploadContaierCLick = ({target}) =>{
 
   if(target.id === 'effect-none') {
     resetSlider();

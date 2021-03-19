@@ -12,10 +12,11 @@ const getData = (onSuccess) => {
       if(response.ok) {
         return response.json()
       }
+
       throw new Error(`${response.status} ${response.statusText}`);
     })
-    .then((createPhotos) => {
-      onSuccess(createPhotos);
+    .then((photosData) => {
+      onSuccess(photosData);
     })
     .then(() => {
       showImgFilterElement();

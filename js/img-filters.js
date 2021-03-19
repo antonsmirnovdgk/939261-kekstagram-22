@@ -1,11 +1,10 @@
 import {getRandomNum} from './utils.js';
-import {createPhotos} from './create-photo.js';
 
 const imgFilterElement = document.querySelector('.img-filters');
 const imgFilterFormElement = document.querySelector('.img-filters__form');
 const filterButtons = imgFilterFormElement.querySelectorAll('.img-filters__button');
 
-const onFilterFormClick = function(evt){
+const onFilterFormClick = (evt) => {
 
   filterButtons.forEach((button) => {
     if (button.id !== evt.target.id) {
@@ -20,24 +19,53 @@ imgFilterFormElement.addEventListener('click', onFilterFormClick);
 
 
 // Показать блок с филтром
-const showImgFilterElement = function(){
+const showImgFilterElement = () => {
   imgFilterElement.classList.remove('img-filters--inactive');
 }
 
 //Случайный список элементов
-const randomElements = function(array){
-  const randomPhotos = array.slice().sort(getRandomNum);
-  createPhotos(randomPhotos.slice(0, 10));
-}
+const randomElements = (array) => {
 
+  let result = [];
 
-const onFilterButtonClick = function(evt, array){
-  if(evt.target.id === 'filter-random'){
-    randomElements(array)
+  while(result.length < 10){
+    let randomElement = array[getRandomNum(0, array.length - 1)];
+
+    if (!result.includes(randomElement)){
+      result.push(randomElement);
+    }
   }
+  return result;
+}
+
+const quantityComents = (a, b) => {
+  if(a.comments.length > b.comments.length){
+    return -1
+  }
+  if (a.comments.length < b.comments.length) {
+    return 1;
+  }
+  return 0;
+}
+
+//Обработчик фильтров
+const onFilterButtonClick = (photos, createPhotos) => {
+
+  const uniqueSet = new Set(photos);
+  const arrayOfSet = [...uniqueSet];
+
+  imgFilterFormElement.addEventListener('click', (evt) => {
+    if(evt.target.id === 'filter-random'){
+      const elementsRandom = randomElements(arrayOfSet);
+      createPhotos(elementsRandom)
+    } else if (evt.target.id === 'filter-discussed') {
+      const commentsLow = arrayOfSet.slice().sort(quantityComents);
+      createPhotos(commentsLow);
+    } else if (evt.target.id === 'filter-default') {
+      createPhotos(arrayOfSet)
+    }
+  })
 }
 
 
-imgFilterFormElement.addEventListener('click', onFilterButtonClick);
-
-export {showImgFilterElement}
+export {showImgFilterElement, onFilterButtonClick}

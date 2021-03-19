@@ -2,9 +2,9 @@ const MAX_HASHTAGS = 5;
 const HASHTAG_VALIDITY_REGEX = RegExp('^#[a-zA-Z0-9а-яА-ЯёЁ]{1,19}$');
 const fieldHashtagElement = document.querySelector('.text__hashtags');
 
-const validateHashtags = function() {
+const validateHashtags = () => {
 
-  fieldHashtagElement.addEventListener('input', function(evt) {
+  fieldHashtagElement.addEventListener('input', (evt) =>{
 
     const hashtagsArray = evt.target.value.toLowerCase().split(' ');
     const isDuplicateHashtagInArray = !hashtagsArray.every((item, index, array) => array.indexOf(item) === index);

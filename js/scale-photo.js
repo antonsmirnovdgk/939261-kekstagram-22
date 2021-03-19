@@ -7,14 +7,14 @@ const STEP = 25;
 const SCALE_BUTTOM = 25;
 const SCALE_TOP = 100;
 
-const resetScale = function(){
+const resetScale = () => {
   valueField.value =`${SCALE_TOP}%`;
   bigImg.style.transform = 'none';
 }
 
 valueField.value = `${SCALE_TOP}%`;
 
-onBiggerButton.addEventListener('click', function(){
+onBiggerButton.addEventListener('click', () => {
   if(parseInt(valueField.value) < SCALE_TOP){
     scaleStep = scaleStep + STEP;
     valueField.value = `${scaleStep}%`;
@@ -22,7 +22,7 @@ onBiggerButton.addEventListener('click', function(){
   }
 })
 
-onSmallerButton.addEventListener('click', function(){
+onSmallerButton.addEventListener('click', () => {
   if(parseInt(valueField.value) > SCALE_BUTTOM){
     scaleStep = parseInt(valueField.value) - STEP;
     valueField.value = `${scaleStep}%`;
