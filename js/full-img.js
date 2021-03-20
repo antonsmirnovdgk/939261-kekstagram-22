@@ -54,41 +54,27 @@ const fillBigPucture = (object) => {
   });
 
 
-  const STEP = 5;
-  // const STEP_TWO = 5;
+  let commetsQty = 5;
 
   loaderCommentElement.classList.add('hidden');
-
-  socialComments.innerHTML = commentsArray.slice(0, STEP).join('');
-
 
   if(commentsArray.length > 5) {
     loaderCommentElement.classList.remove('hidden');
   }
 
+  socialComments.innerHTML = commentsArray.slice(0, commetsQty).join('');
+
   loaderCommentElement.addEventListener('click', () => {
 
-    let displayComments = STEP + STEP;
+    let counterStep = 5;
+    commetsQty = commetsQty + counterStep;
 
-    socialComments.innerHTML = commentsArray.slice(0, displayComments).join('');
+    socialComments.innerHTML = commentsArray.slice(0, commetsQty).join('');
 
-    window.console.log(displayComments);
+    if(commentsArray.length <= commetsQty) {
+      loaderCommentElement.classList.add('hidden');
+    }
   })
-
-  // if(commentsArray.length > 5){
-
-  //
-
-
-
-  // socialComments.innerHTML = commentsArray.slice(0, displayComments).join('');
-  // commentsArray.length =
-  // let b = commentsArray.slice(0, 5);
-  // socialComments.innerHTML = b;
-
-  // }
-
-  // socialComments.innerHTML = commentsArray.join('');
 };
 
 const onEscKeyDown = (evt) => {
