@@ -1,71 +1,71 @@
 import {getRandomNum} from './utils.js';
 
-// const imgFilterElement = document.querySelector('.img-filters');
-// const filterRandomElement = document.querySelector('#filter-random');
+const imgFilterElement = document.querySelector('.img-filters');
+const imgFilterFormElement = document.querySelector('.img-filters__form');
+const filterButtons = imgFilterFormElement.querySelectorAll('.img-filters__button');
 
-// const imgFilterFormElement = document.querySelector('.img-filters__form');
+const onFilterFormClick = (evt) => {
 
+  filterButtons.forEach((button) => {
+    if (button.id !== evt.target.id) {
+      button.classList.remove('img-filters__button--active');
+    } else {
+      button.classList.add('img-filters__button--active');
+    }
+  });
+}
 
-// const onFilterFormClick = function(evt){
-//   if(evt.target.id === 'filter-random'){
-//     evt.target.classList.add('img-filters__button--active')
-
-//   }else {
-//     evt.target.classList.remove('img-filters__button--active')
-//   }
-// }
-
-// imgFilterFormElement.addEventListener('click', onFilterFormClick);
-
-
-
-//Показать блок с филтром
-// const showImgFilterElement = function(){
-//   imgFilterElement.classList.remove('img-filters--inactive');
-// }
+imgFilterFormElement.addEventListener('click', onFilterFormClick);
 
 
-let arrONe = ['qwe', 'ewq', 'qwe', 'asd', 'asd', 'aaa', 'ccc', 'ddd', 'aaa', 'cdc', 'ascd', 'asd', 'bbb', 'qwe', 'ewq', 'qwe', 'asd', 'asd', 'aaa', 'ccc', 'ddd', 'aaa', 'cdc', 'ascd', 'asd', 'bbb'];
+// Показать блок с филтром
+const showImgFilterElement = () => {
+  imgFilterElement.classList.remove('img-filters--inactive');
+}
 
+//Случайный список элементов
+const randomElements = (array) => {
 
+  let result = [];
 
+  while(result.length < 10){
+    let randomElement = array[getRandomNum(0, array.length - 1)];
 
-// const filterRandom = function(array){
-
-//   const result = [];
-
-//   for(let i = 0; result.length < 10; i++) {
-//     const randomElement = array[getRandomNum(0, array.length - 1)];
-
-//     if (!result.includes(randomElement)) {
-
-//       result.push(randomElement);
-//     }
-//   }
-
-//   window.console.log(result);
-//   return result;
-
-// }
-
-const randomFilter = (array) => {
-  const resultedArray = [];
-  while (resultedArray.length < 10) {
-    const randomItem = array[getRandomNum(0, array.length - 1)];
-    const isDublicate = resultedArray.includes(randomItem);
-
-    if (!isDublicate) {
-      resultedArray.push(randomItem);
+    if (!result.includes(randomElement)){
+      result.push(randomElement);
     }
   }
-  // window.console.log(resultedArray);
-  return resultedArray;
-};
+  return result;
+}
+
+const quantityComents = (a, b) => {
+  if(a.comments.length > b.comments.length){
+    return -1
+  }
+  if (a.comments.length < b.comments.length) {
+    return 1;
+  }
+  return 0;
+}
+
+//Обработчик фильтров
+const onFilterButtonClick = (photos, createPhotos) => {
+
+  const uniqueSet = new Set(photos);
+  const arrayOfSet = [...uniqueSet];
+
+  imgFilterFormElement.addEventListener('click', (evt) => {
+    if(evt.target.id === 'filter-random'){
+      const elementsRandom = randomElements(arrayOfSet);
+      createPhotos(elementsRandom)
+    } else if (evt.target.id === 'filter-discussed') {
+      const commentsLow = arrayOfSet.slice().sort(quantityComents);
+      createPhotos(commentsLow);
+    } else if (evt.target.id === 'filter-default') {
+      createPhotos(arrayOfSet)
+    }
+  })
+}
 
 
-randomFilter(arrONe);
-
-// filterRandomElement.addEventListener('click', filterRandom(arrONe));
-
-
-// export {showImgFilterElement}
+export {showImgFilterElement, onFilterButtonClick}

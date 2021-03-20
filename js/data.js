@@ -13,7 +13,7 @@ const COMMENTS = [' Всё отлично!',
 const DESCRIPTIONS = ['Кот-суши', 'Закат', 'Озеро', 'Очень красивые глаза', 'Супер-кар'];
 
 //Объект фотокарточки
-const createObjectOfPhoto = function(index) {
+const createObjectOfPhoto = (index) => {
   return {
     id: index + 1,
     url: 'photos/' + getRandomNum(1, 25) + '.jpg',
@@ -24,7 +24,7 @@ const createObjectOfPhoto = function(index) {
 };
 
 //Объект коментарий
-const createCommentObject = function(index) {
+const createCommentObject = (index) => {
   return {
     id: index + 1,
     avatar: 'img/avatar-' + getRandomNum(1, 6) + '.svg',

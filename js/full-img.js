@@ -1,8 +1,5 @@
-// import {arrayOfObjectsPhoto} from './data.js';
 import {isEscEvent} from './utils.js';
 import {arrayOfPhotos} from './create-photo.js';
-
-
 
 const parrentContainerElement = document.querySelector('.pictures');
 const fullImgElement = document.querySelector('.big-picture');
@@ -16,9 +13,7 @@ const likesCountElement = fullImgElement.querySelector('.likes-count');
 const descriptionElement = document.querySelector('.social__caption');
 const commentsCount = fullImgElement.querySelector('.comments-count');
 
-
-
-const onParentContainerClick = function(evt){
+const onParentContainerClick = (evt) => {
   if(evt.target.parentNode.matches('a')) {
     const objectOfSmallPic = arrayOfPhotos.find((item) => +item.id === +evt.target.parentNode.id);
     fillBigPucture(objectOfSmallPic);
@@ -26,8 +21,7 @@ const onParentContainerClick = function(evt){
   }
 }
 
-
-const createComment = function(object){
+const createComment = (object) => {
   return `<li class="social__comment">
   <img
     class="social__picture"
@@ -40,48 +34,40 @@ const createComment = function(object){
   </li>`
 }
 
-const showBigPicture = function(){
+const showBigPicture = () => {
   document.body.classList.add('modal-open');
   fullImgElement.classList.remove('hidden');
-  // loaderCommentElement.classList.add('hidden');
-  // commentCountElement.classList.add('hidden');
   document.addEventListener('keydown', onEscKeyDown);
 };
 
-const fillBigPucture = function(object){
+const fillBigPucture = (object) => {
 
   const socialComments = fullImgElement.querySelector('.social__comments');
-
 
   bigImgElement.childNodes[1].src = object.url;
   likesCountElement.textContent = object.likes;
   descriptionElement.textContent = object.description;
   commentsCount.textContent = object.comments.length;
 
-  window.console.log(object.comments);
-
-
-  const commentsArray = object.comments.map(function(currentValue) {
+  const commentsArray = object.comments.map((currentValue) => {
     return createComment(currentValue)
   });
 
   socialComments.innerHTML = commentsArray.join('');
-
 };
 
-
-const onEscKeyDown = function(evt){
+const onEscKeyDown = (evt) => {
   if(isEscEvent(evt)){
     closeBigImg();
   }
 };
 
-const closeBigImg = function(){
+const closeBigImg = () => {
   fullImgElement.classList.add('hidden');
   document.body.classList.remove('modal-open');
 };
 
-closedButtonElement.addEventListener('click', function(){
+closedButtonElement.addEventListener('click', () => {
   document.removeEventListener('keydown', onEscKeyDown);
   closeBigImg();
 });

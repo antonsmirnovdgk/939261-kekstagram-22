@@ -47,9 +47,9 @@ const onEscKeyDown = function(evt){
 };
 
 //запрет закрытия поп-ап окна при фокусе на текстовом блоке
-const onFieldFocus = function(evt) {
+const onFieldFocus = (evt) => {
 
-  evt.target.addEventListener('keydown', function(evt) {
+  evt.target.addEventListener('keydown', (evt) => {
 
     if(isEscEvent(evt)) {
       evt.preventDefault();

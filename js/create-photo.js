@@ -1,37 +1,51 @@
-// import {arrayOfObjectsPhoto} from './data.js';
+/* global _:readonly */
 import {getData} from  './fetch.js';
 import {isEscEvent} from './utils.js';
+import {onFilterButtonClick} from './img-filters.js';
 
-const pictureContainer = document.querySelector('.pictures');
-const similarTemplate = document.querySelector('#picture').content.querySelector('.picture');
-const fragment = document.createDocumentFragment();
+const picturesContainerElement = document.querySelector('.pictures');
+const similarTemplateElement = document.querySelector('#picture').content.querySelector('.picture');
+const fragmentElement = document.createDocumentFragment();
 const successMessageElement = document.querySelector('#success').content.querySelector('.success');
 const mainElement = document.querySelector('main');
 const errMessageElement = document.querySelector('#error').content.querySelector('.error');
+const RERENDER_DELAY = 500;
 
-const arrayOfPhotos = [];
+const clearPicturesContainer = () => {
+  fragmentElement.innerHTML = '';
+  const pictures = picturesContainerElement.querySelectorAll('.picture');
+  pictures.forEach((picture) => {
+    picture.remove();
+  });
+}
 
-const createPhotos = function(photos) {
+let arrayOfPhotos = [];
+
+const createPhotos = (photos) => {
+
   photos.forEach((item) => {
-    const pictureTemplate = similarTemplate.cloneNode(true);
+    const pictureTemplate = similarTemplateElement.cloneNode(true);
     pictureTemplate.querySelector('.picture__img').src = item.url;
     pictureTemplate.querySelector('.picture__likes').textContent = item.likes;
     pictureTemplate.querySelector('.picture__comments').textContent = item.message;
     pictureTemplate.id = item.id;
-    fragment.appendChild(pictureTemplate);
+    fragmentElement.appendChild(pictureTemplate);
 
     arrayOfPhotos.push(item);
+
   });
-  pictureContainer.appendChild(fragment);
+
+  clearPicturesContainer();
+  picturesContainerElement.appendChild(fragmentElement);
 };
 
 
 // Шаблон успешной загрузки данных
-const createSuccessMessage = function() {
+const createSuccessMessage = () => {
   const successMessageTemplate = successMessageElement.cloneNode(true);
   mainElement.appendChild(successMessageTemplate);
 
-  const onEscKeyDown = function(evt){
+  const onEscKeyDown = (evt) => {
     if(isEscEvent(evt)){
       onSuccessButtonClick();
     }
@@ -39,7 +53,7 @@ const createSuccessMessage = function() {
 
   document.addEventListener('keydown', onEscKeyDown);
 
-  const onDocumentClick = function(evt) {
+  const onDocumentClick = (evt) => {
     const successRegionElement = evt.target.className === 'success';
     const successButtonElement = evt.target.className === 'success__button';
 
@@ -52,7 +66,7 @@ const createSuccessMessage = function() {
 
   document.addEventListener('click', onDocumentClick);
 
-  const onSuccessButtonClick = function(){
+  const onSuccessButtonClick = () => {
     successMessageTemplate.classList.add('hidden');
     document.removeEventListener('keydown', onEscKeyDown);
     document.removeEventListener('click', onDocumentClick);
@@ -60,17 +74,17 @@ const createSuccessMessage = function() {
 };
 
 // Шаблон не успешной загрузки данных
-const createErrMessage = function() {
+const createErrMessage = () => {
   const errMessageTemplate = errMessageElement.cloneNode(true);
   mainElement.appendChild(errMessageTemplate);
 
-  const onEscKeyDown = function(evt){
+  const onEscKeyDown = (evt) => {
     if(isEscEvent(evt)){
       onErrButtonClose();
     }
   };
 
-  const onDocumentClick = function(evt) {
+  const onDocumentClick = (evt) => {
     const errorRegionElement = evt.target.className === 'error';
     const errorButtonElement = evt.target.className === 'error__button';
 
@@ -84,13 +98,16 @@ const createErrMessage = function() {
   document.addEventListener('keydown', onEscKeyDown);
   document.addEventListener('click', onDocumentClick);
 
-  const onErrButtonClose = function(){
+  const onErrButtonClose = () => {
     errMessageTemplate.classList.add('hidden');
     document.removeEventListener('keydown', onEscKeyDown);
     document.removeEventListener('click', onDocumentClick);
   }
 };
 
-getData(createPhotos);
+getData((photos) => {
+  createPhotos(photos);
+  onFilterButtonClick(photos, _.debounce(createPhotos, RERENDER_DELAY));
+});
 
 export {createSuccessMessage, createErrMessage, arrayOfPhotos};
