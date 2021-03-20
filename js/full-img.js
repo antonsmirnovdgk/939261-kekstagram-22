@@ -12,6 +12,8 @@ const likesCountElement = fullImgElement.querySelector('.likes-count');
 // const commentTextElement = document.querySelectorAll('.social__text');
 const descriptionElement = document.querySelector('.social__caption');
 const commentsCount = fullImgElement.querySelector('.comments-count');
+const COUNTER_STEP = 5;
+
 
 const onParentContainerClick = (evt) => {
   if(evt.target.parentNode.matches('a')) {
@@ -66,8 +68,8 @@ const fillBigPucture = (object) => {
 
   loaderCommentElement.addEventListener('click', () => {
 
-    let counterStep = 5;
-    commetsQty = commetsQty + counterStep;
+
+    commetsQty = commetsQty + COUNTER_STEP;
 
     socialComments.innerHTML = commentsArray.slice(0, commetsQty).join('');
 
