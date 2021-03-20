@@ -12,8 +12,10 @@ const likesCountElement = fullImgElement.querySelector('.likes-count');
 // const commentTextElement = document.querySelectorAll('.social__text');
 const descriptionElement = document.querySelector('.social__caption');
 const commentsCount = fullImgElement.querySelector('.comments-count');
+const pictureSocialElement = fullImgElement.querySelector('.big-picture__social');
 const COUNTER_STEP = 5;
-
+let commetsQty = 5;
+let loaderComment;
 
 const onParentContainerClick = (evt) => {
   if(evt.target.parentNode.matches('a')) {
@@ -40,10 +42,10 @@ const showBigPicture = () => {
   document.body.classList.add('modal-open');
   fullImgElement.classList.remove('hidden');
   document.addEventListener('keydown', onEscKeyDown);
+
 };
 
 const fillBigPucture = (object) => {
-
   const socialComments = fullImgElement.querySelector('.social__comments');
 
   bigImgElement.childNodes[1].src = object.url;
@@ -55,28 +57,24 @@ const fillBigPucture = (object) => {
     return createComment(currentValue)
   });
 
-
-  let commetsQty = 5;
-
   loaderCommentElement.classList.add('hidden');
 
-  if(commentsArray.length > 5) {
+  if(commentsArray.length > commetsQty) {
     loaderCommentElement.classList.remove('hidden');
   }
 
   socialComments.innerHTML = commentsArray.slice(0, commetsQty).join('');
 
-  loaderCommentElement.addEventListener('click', () => {
-
-
+  loaderComment = () => {
     commetsQty = commetsQty + COUNTER_STEP;
-
     socialComments.innerHTML = commentsArray.slice(0, commetsQty).join('');
 
     if(commentsArray.length <= commetsQty) {
       loaderCommentElement.classList.add('hidden');
     }
-  })
+  }
+
+  pictureSocialElement.addEventListener('click', loaderComment);
 };
 
 const onEscKeyDown = (evt) => {
@@ -88,11 +86,14 @@ const onEscKeyDown = (evt) => {
 const closeBigImg = () => {
   fullImgElement.classList.add('hidden');
   document.body.classList.remove('modal-open');
+  pictureSocialElement.removeEventListener('click', loaderComment);
+  commetsQty = 5;
 };
 
 closedButtonElement.addEventListener('click', () => {
   document.removeEventListener('keydown', onEscKeyDown);
   closeBigImg();
 });
+
 
 parrentContainerElement.addEventListener('click', onParentContainerClick);
