@@ -27,7 +27,7 @@ const createPhotos = (photos) => {
     const pictureTemplate = similarTemplateElement.cloneNode(true);
     pictureTemplate.querySelector('.picture__img').src = item.url;
     pictureTemplate.querySelector('.picture__likes').textContent = item.likes;
-    pictureTemplate.querySelector('.picture__comments').textContent = item.message;
+    pictureTemplate.querySelector('.picture__comments').textContent = item.comments.length;
     pictureTemplate.id = item.id;
     fragmentElement.appendChild(pictureTemplate);
 
