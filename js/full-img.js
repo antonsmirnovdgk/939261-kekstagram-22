@@ -68,7 +68,6 @@ const fillBigPucture = (object) => {
   loaderComment = () => {
     commetsQty = commetsQty + COUNTER_STEP;
     commentCountElement.innerHTML = `${commetsQty} из ${commentsArray.length} комментариев`;
-
     socialComments.innerHTML = commentsArray.slice(0, commetsQty).join('');
 
     if(commentsArray.length < commetsQty) {
