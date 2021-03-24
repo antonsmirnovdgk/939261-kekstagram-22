@@ -58,6 +58,8 @@ const fillBigPucture = (object) => {
   //Загрузка комментариев
   loaderCommentElement.classList.add('hidden');
 
+
+
   if(commentsArray.length > commetsQty) {
     loaderCommentElement.classList.remove('hidden');
   }
@@ -65,12 +67,15 @@ const fillBigPucture = (object) => {
   socialComments.innerHTML = commentsArray.slice(0, commetsQty).join('');
   commentCountElement.innerHTML = `${commetsQty} из ${commentsArray.length} комментариев`;
 
+  if(commentsArray.length < 5) {
+    commentCountElement.innerHTML = '';
+  }
+
   loaderComment = () => {
     commetsQty = commetsQty + COUNTER_STEP;
     commentCountElement.innerHTML = `${commetsQty} из ${commentsArray.length} комментариев`;
 
     socialComments.innerHTML = commentsArray.slice(0, commetsQty).join('');
-
     if(commentsArray.length < commetsQty) {
       loaderCommentElement.classList.add('hidden');
       commentCountElement.innerHTML = `${commentsArray.length} из ${commentsArray.length} комментариев`;
