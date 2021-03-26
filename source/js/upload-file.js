@@ -61,9 +61,9 @@ const onFieldFocus = (evt) => {
 //Отправка файлов на сервер
 const onUploadFormSubmit = (evt) => {
   evt.preventDefault();
-  closeImg();
   const formData = new FormData(evt.target);
   sendData(createSuccessMessage, createErrMessage, formData);
+  closeImg();
 }
 
 uploadFormElement.addEventListener('submit', onUploadFormSubmit)
