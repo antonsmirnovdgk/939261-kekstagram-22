@@ -12,6 +12,7 @@ const descriptionElement = document.querySelector('.social__caption');
 const commentsCount = fullImgElement.querySelector('.comments-count');
 const pictureSocialElement = fullImgElement.querySelector('.comments-loader');
 const COUNTER_STEP = 5;
+const COMMENT_LENGTH = 5;
 let commetsQty = 5;
 let loaderComment;
 
@@ -67,7 +68,7 @@ const fillBigPucture = (object) => {
   socialComments.innerHTML = commentsArray.slice(0, commetsQty).join('');
   commentCountElement.innerHTML = `${commetsQty} из ${commentsArray.length} комментариев`;
 
-  if(commentsArray.length < 5) {
+  if(commentsArray.length < COMMENT_LENGTH) {
     commentCountElement.innerHTML = '';
   }
 
@@ -94,7 +95,7 @@ const closeBigImg = () => {
   fullImgElement.classList.add('hidden');
   document.body.classList.remove('modal-open');
   pictureSocialElement.removeEventListener('click', loaderComment);
-  commetsQty = 5;
+  commetsQty = COMMENT_LENGTH;
 };
 
 closedButtonElement.addEventListener('click', () => {
