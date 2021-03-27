@@ -12,7 +12,7 @@ const uploadFormElement = document.querySelector('.img-upload__form');
 const commentFieldElement = document.querySelector('.text__description');
 
 // Открытие поп-ап
-uploadFieldElement.addEventListener('change', function(){
+uploadFieldElement.addEventListener('change', () => {
   resetSlider();
   document.addEventListener('keydown', onEscKeyDown);
   allTextElement.addEventListener('focusin', onFieldFocus);
@@ -21,7 +21,7 @@ uploadFieldElement.addEventListener('change', function(){
 });
 
 //закрытие поп-ап
-closeUploadButtonElement.addEventListener('click', function(){
+closeUploadButtonElement.addEventListener('click', () => {
   closeImg();
 });
 
