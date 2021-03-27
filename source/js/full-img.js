@@ -12,6 +12,7 @@ const descriptionElement = document.querySelector('.social__caption');
 const commentsCount = fullImgElement.querySelector('.comments-count');
 const pictureSocialElement = fullImgElement.querySelector('.comments-loader');
 const COUNTER_STEP = 5;
+const COMMENT_LENGTH = 5;
 let commetsQty = 5;
 let loaderComment;
 
@@ -58,6 +59,8 @@ const fillBigPucture = (object) => {
   //Загрузка комментариев
   loaderCommentElement.classList.add('hidden');
 
+
+
   if(commentsArray.length > commetsQty) {
     loaderCommentElement.classList.remove('hidden');
   }
@@ -65,11 +68,14 @@ const fillBigPucture = (object) => {
   socialComments.innerHTML = commentsArray.slice(0, commetsQty).join('');
   commentCountElement.innerHTML = `${commetsQty} из ${commentsArray.length} комментариев`;
 
+  if(commentsArray.length < COMMENT_LENGTH) {
+    commentCountElement.innerHTML = '';
+  }
+
   loaderComment = () => {
     commetsQty = commetsQty + COUNTER_STEP;
     commentCountElement.innerHTML = `${commetsQty} из ${commentsArray.length} комментариев`;
     socialComments.innerHTML = commentsArray.slice(0, commetsQty).join('');
-
     if(commentsArray.length < commetsQty) {
       loaderCommentElement.classList.add('hidden');
       commentCountElement.innerHTML = `${commentsArray.length} из ${commentsArray.length} комментариев`;
@@ -89,7 +95,7 @@ const closeBigImg = () => {
   fullImgElement.classList.add('hidden');
   document.body.classList.remove('modal-open');
   pictureSocialElement.removeEventListener('click', loaderComment);
-  commetsQty = 5;
+  commetsQty = COMMENT_LENGTH;
 };
 
 closedButtonElement.addEventListener('click', () => {
