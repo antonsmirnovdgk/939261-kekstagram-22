@@ -25,6 +25,7 @@ const showImgFilterElement = () => {
 
 //Случайный список элементов
 const getRandomElements = (array) => {
+
   let results = [];
 
   while(results.length < 10){
