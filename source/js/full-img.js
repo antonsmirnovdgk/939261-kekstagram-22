@@ -1,6 +1,8 @@
 import {isEscEvent} from './utils.js';
 import {arrayOfPhotos} from './create-photo.js';
 
+const COUNTER_STEP = 5;
+const COMMENT_LENGTH = 5;
 const parrentContainerElement = document.querySelector('.pictures');
 const fullImgElement = document.querySelector('.big-picture');
 const closedButtonElement = fullImgElement.querySelector('.big-picture__cancel');
@@ -11,8 +13,6 @@ const likesCountElement = fullImgElement.querySelector('.likes-count');
 const descriptionElement = document.querySelector('.social__caption');
 const commentsCount = fullImgElement.querySelector('.comments-count');
 const pictureSocialElement = fullImgElement.querySelector('.comments-loader');
-const COUNTER_STEP = 5;
-const COMMENT_LENGTH = 5;
 let commetsQty = 5;
 let loaderComment;
 

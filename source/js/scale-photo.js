@@ -1,11 +1,11 @@
+const STEP = 25;
+const SCALE_BUTTOM = 25;
+const SCALE_TOP = 100;
 const onSmallerButton = document.querySelector('.scale__control--smaller');
 const valueField = document.querySelector('.scale__control--value');
 const onBiggerButton = document.querySelector('.scale__control--bigger');
 const bigImg = document.querySelector('.img-upload__preview');
 let scaleStep = 25;
-const STEP = 25;
-const SCALE_BUTTOM = 25;
-const SCALE_TOP = 100;
 
 const resetScale = () => {
   valueField.value =`${SCALE_TOP}%`;

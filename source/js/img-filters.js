@@ -24,21 +24,21 @@ const showImgFilterElement = () => {
 }
 
 //Случайный список элементов
-const randomElements = (array) => {
+const getRandomElements = (array) => {
 
-  let result = [];
+  let results = [];
 
-  while(result.length < 10){
+  while(results.length < 10){
     let randomElement = array[getRandomNum(0, array.length - 1)];
 
-    if (!result.includes(randomElement)){
-      result.push(randomElement);
+    if (!results.includes(randomElement)){
+      results.push(randomElement);
     }
   }
-  return result;
+  return results;
 }
 
-const quantityComents = (a, b) => {
+const getQuantityComents = (a, b) => {
   if(a.comments.length > b.comments.length){
     return -1
   }
@@ -56,10 +56,10 @@ const onFilterButtonClick = (photos, createPhotos) => {
 
   imgFilterFormElement.addEventListener('click', (evt) => {
     if(evt.target.id === 'filter-random'){
-      const elementsRandom = randomElements(arrayOfSet);
+      const elementsRandom = getRandomElements(arrayOfSet);
       createPhotos(elementsRandom)
     } else if (evt.target.id === 'filter-discussed') {
-      const commentsLow = arrayOfSet.slice().sort(quantityComents);
+      const commentsLow = arrayOfSet.slice().sort(getQuantityComents);
       createPhotos(commentsLow);
     } else if (evt.target.id === 'filter-default') {
       createPhotos(arrayOfSet)
