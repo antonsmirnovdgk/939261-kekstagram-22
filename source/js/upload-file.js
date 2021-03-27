@@ -26,12 +26,12 @@ closeUploadButtonElement.addEventListener('click', function(){
 });
 
 //функция сброса настроек поп-ап окна
-const resetPopUp = function(){
+const resetPopUp = () => {
   fieldHashtagElement.value = '';
   commentFieldElement.value = '';
 }
 
-const closeImg = function(){
+const closeImg = () => {
   resetSlider();
   resetPopUp();
   imgUploadElement.classList.add('hidden');
@@ -40,7 +40,7 @@ const closeImg = function(){
   uploadFieldElement.value = '';
 }
 
-const onEscKeyDown = function(evt){
+const onEscKeyDown = (evt) => {
   if(isEscEvent(evt)){
     closeImg();
   }
